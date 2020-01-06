@@ -1,10 +1,10 @@
 # inpeach
 they put trump in a peach
 ## Roster and Role:
-- Jude Rizzo (Project Manager)
-- Kevin Cai
-- Kazi Jamal
-- Ahmed Sultan
+- Jude Rizzo: Project Manager, Director of Authentication 
+- Kevin Cai: Groups and Post Builder
+- Kazi Jamal: Messages and Friend Manager
+- Ahmed Sultan: Dashboard and Feed Developer
 
 ## How to Run the Project:
 - We are assuming that the user has installed Python3 and pip in their environment
