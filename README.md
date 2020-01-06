@@ -1,4 +1,4 @@
-# inpeach by theyputhiminapeach
+# Oikos by theyputhiminapeach
 ## Roster and Role:
 - Jude Rizzo: Project Manager, Director of Authentication 
 - Kevin Cai: Groups and Post Builder
