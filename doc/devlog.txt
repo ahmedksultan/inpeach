@@ -1,0 +1,5 @@
+judeR -- 2019-12-19 14:30
+Team theyputhiminapeach formed, chose Jude Rizzo as project manager. Initialized repo with Flask template and linked submodule.
+
+judeR -- 2020-01-05 23:45
+Uploaded first design document and PDFS of relevant API KB cards. Updated README to display roles and APIs.
