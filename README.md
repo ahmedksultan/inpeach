@@ -1,10 +1,13 @@
-# inpeach
-they put trump in a peach
+# inpeach by theyputhiminapeach
 ## Roster and Role:
 - Jude Rizzo: Project Manager, Director of Authentication 
 - Kevin Cai: Groups and Post Builder
 - Kazi Jamal: Messages and Friend Manager
 - Ahmed Sultan: Dashboard and Feed Developer
+
+## APIs Utilized
+- MetaWeather API: https://docs.google.com/document/d/18uyXB5XPFQoGFJpoa2yQvRPhevc3HaBU4kO-OYN-ieY/edit
+- News API: https://docs.google.com/document/d/1sLb7KpsBcx1_dCzuLicWvnSaQJRepZ1YM12tMxbj2RA/edit
 
 ## How to Run the Project:
 - We are assuming that the user has installed Python3 and pip in their environment
