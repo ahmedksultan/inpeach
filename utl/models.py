@@ -18,13 +18,13 @@ class Community(db.Model):
 
 class Member(db.Model):
     memberID = db.Column(db.Integer, primary_key=True)
-    groupID = db.Column(db.Integer, nullable=False)
+    communityID = db.Column(db.Integer, nullable=False)
     userID = db.Column(db.Integer, nullable=False)
     displayName = db.Column(db.Integer, nullable=False)
 
 class Post(db.Model):
     postID = db.Column(db.Integer, primary_key=True)
-    groupID = db.Column(db.Integer, nullable=True)
+    communityID = db.Column(db.Integer, nullable=True)
     userID = db.Column(db.Integer, nullable=False)
     title = db.Column(db.Text, nullable=False)
     content = db.Column(db.Text, nullable=False)
