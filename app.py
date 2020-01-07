@@ -5,6 +5,7 @@ from config import Config
 from utl import models
 db = models.db
 Community = models.Community
+from utl import functions
 import sqlite3
 import os
 
@@ -18,7 +19,7 @@ def root():
     newcommunity2 = Community(name="name2", description="description2")
     db.session.add(newcommunity2)
     db.session.commit()
-    return __name__;
+    return __name__
 
 if __name__ == "__main__":
     db.init_app(app)
