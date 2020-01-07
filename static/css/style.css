@@ -1,0 +1,19 @@
+.bg-primary {
+     background-color: indigo !important;
+}
+
+.navbar {
+     padding: 2% !important;
+}
+
+.nav-item {
+     color: white;
+}
+
+.nav-item:hover {
+     color: plum;
+}
+
+.navbar .navbar-brand {
+     font-size: 36px;
+}
