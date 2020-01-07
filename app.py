@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from config import Config
 from utl import models
 db = models.db
-Group = models.Group
+Community = models.Community
 import sqlite3
 import os
 
@@ -13,11 +13,11 @@ app.config.from_object(Config)
 
 @app.route("/")
 def root():
-    newgroup = Group(name="name", description="description")
-    db.session.add(newgroup)
-    newgroup2 = Group(name="name2", description="description2")
-    db.session.add(newgroup2)
-    db.session.commit
+    newcommunity = Community(name="name", description="description")
+    db.session.add(newcommunity)
+    newcommunity2 = Community(name="name2", description="description2")
+    db.session.add(newcommunity2)
+    db.session.commit()
     return __name__;
 
 if __name__ == "__main__":

@@ -11,8 +11,8 @@ class User(db.Model):
     lastname = db.Column(db.Text, nullable=False)
     grade = db.Column(db.Text, nullable=False)
 
-class Group(db.Model):
-    groupID = db.Column(db.Integer, primary_key=True)
+class Community(db.Model):
+    communityID = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Text, nullable=False)
     description = db.Column(db.Text, nullable=False)
 
