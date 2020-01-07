@@ -1,4 +1,4 @@
-from models import db, User, Community, Member, Post, Comment, FriendRequest, Friend, Message
+from .models import db, User, Community, Member, Post, Comment, FriendRequest, Friend, Message
 
 def registerUser(email, password, firstName, lastName, grade):
     user = User(email=email, password=password, firstName=firstName, lastName=lastName, grade=grade)
