@@ -1,8 +1,8 @@
 from models import db, User, Community, Member, Post, Comment, FriendRequest, Friend, Message
 
 def registerUser(email, password, firstName, lastName, grade):
-    newuser = User(email=email, password=password, firstName=firstName, lastName=lastName, grade=grade)
-    db.session.add(newuser)
+    user = User(email=email, password=password, firstName=firstName, lastName=lastName, grade=grade)
+    db.session.add(user)
     db.session.commit()
 
 def authenticateUser(email, password):
@@ -10,6 +10,21 @@ def authenticateUser(email, password):
     if user == None:
         return False
     return True
+
+def createCommunity(name, description):
+    community = Community(name=name, description=description)
+    db.session.add(community)
+    db.session.commit()
+
+def joinCommunity(userID, communityID):
+    user = User.query.filter_by(userID=userID).first()
+    member = Member(communityID=communityID, userID=userID, displayName=user.displayName)
+    db.session.add(member)
+    db.session.commit()
+
+def leaveCommunity(userID, communityID):
+    Member.query.filter_by(communityID=communityID, userID=userID).first().delete()
+    db.session.commit()
 
 def getFriendRequests(userID):
     friendrequests = FriendRequest.query.filter_by(receiverID=userID).order_by(FriendRequest.timestamp.desc())
@@ -19,7 +34,6 @@ def sendFriendRequest(senderID, receiverID, message):
     friendrequest = FriendRequest(senderID=senderID, receiverID=receiverID, message=message)
     db.session.add(friendrequest)
     db.session.commit()
-    return True
 
 def acceptFriendRequest(requestID):
     friendrequest = FriendRequest.query.filter_by(requestID=requestID).first()
