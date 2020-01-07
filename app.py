@@ -1,24 +1,28 @@
-from flask import Flask
-from flask import render_template
-from flask import redirect
-from flask import url_for
-from flask import session
-from flask import flash
+from flask import Flask, render_template, request, redirect, url_for, session, flash
+from functools import wraps
+from flask_sqlalchemy import SQLAlchemy
+from config import Config
+from utl import models
+db = models.db
+Group = models.Group
 import sqlite3
 import os
-import json
 
 app = Flask(__name__)
-
-# setting up the database
-DB_FILE = "deutschebank.db"
-db = sqlite3.connect(DB_FILE, check_same_thread=False)
-c = db.cursor()
+app.config.from_object(Config)
 
 @app.route("/")
 def root():
+    newgroup = Group(name="name", description="description")
+    db.session.add(newgroup)
+    newgroup2 = Group(name="name2", description="description2")
+    db.session.add(newgroup2)
+    db.session.commit
     return __name__;
 
 if __name__ == "__main__":
+    db.init_app(app)
+    with app.app_context():
+        db.create_all()
     app.debug = True
     app.run()
