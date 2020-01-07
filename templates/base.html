@@ -1,12 +1,22 @@
 <!DOCTYPE html>
-<html>
-<head>
-</head>
-<body>
-  {% for title, text in allPosts.iteritems() %}
-    <!-- TODO: add bootsrap-->
-    <h3>{{title}}</h3>
-    <p>{{text}}</p>
-  {% endfor %}
-</body>
+  <html>
+  <head>
+    <title>{% pagetitle %} {% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/style.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a class="navbar-brand" href="#"><b>Oikos</b></a>
+      <div class="navbar-nav">
+        <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="#">Features</a>
+        <a class="nav-item nav-link" href="#">Pricing</a>
+        <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      </div>
+    </nav>
+    {% block body %} {% endblock %}
+    {% block footer %} {% endblock %}
+  </body>
 </html>

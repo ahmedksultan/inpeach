@@ -1,0 +1,11 @@
+.bg-primary {
+     background-color: indigo !important;
+}
+
+.navbar {
+     padding: 2% !important;
+}
+
+.navbar .navbar-brand {
+     font-size: 36px;
+}
