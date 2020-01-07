@@ -1,5 +1,16 @@
 from models import db, User, Community, Member, Post, Comment, FriendRequest, Friend, Message
 
+def registerUser(email, password, firstName, lastName, grade):
+    newuser = User(email=email, password=password, firstName=firstName, lastName=lastName, grade=grade)
+    db.session.add(newuser)
+    db.session.commit()
+
+def authenticateUser(email, password):
+    user = User.query.filter_by(email=email, password=password).first()
+    if user == None:
+        return False
+    return True
+
 def getFriendRequests(userID):
     friendrequests = FriendRequest.query.filter_by(receiverID=userID).order_by(FriendRequest.timestamp.desc())
     return friendrequests
