@@ -10,3 +10,6 @@ def authenticateUser(email, password):
     if user == None:
         return False
     return True
+def getUser(email):
+    user = User.query.filter_by(email=email).first()
+    return user

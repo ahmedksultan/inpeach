@@ -1,4 +1,4 @@
-from .models import db, Community, Members, User
+from .models import db, Community, Member, User
 
 def getCommunities(userID):
     members = Member.query.filter_by(userID=userID).all()

@@ -18,4 +18,4 @@ def createPost(communityID, userID, title, content):
 
 def deletePost(postID):
     Post.query.filter_by(postID=postID).first().delete()
-    db.session.commit()order_by
+    db.session.commit()

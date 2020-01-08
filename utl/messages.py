@@ -2,7 +2,7 @@ from .models import db, Message
 
 def getMessages(userID, contactID):
     sentMessages = Message.query.filter_by(senderID=userID, receiverID=contactID).order_by(Message.timestamp.asc()).all()
-    receivedMessages = Message.query.filter_by(senderID=contactID, receiverID=userID).order_by(Message.timestamp.asc()).all)()
+    receivedMessages = Message.query.filter_by(senderID=contactID, receiverID=userID).order_by(Message.timestamp.asc()).all()
     messages = []
     messages.append(sentMessages)
     messages.append(receivedMessages)
