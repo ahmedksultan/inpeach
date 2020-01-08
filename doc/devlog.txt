@@ -30,3 +30,6 @@ Updated design document to replace instances of "group" in the database with "co
 
 kevinC -- 2020-01-08 06:54
 Added login page and logic for signup/login on app.py
+
+ahmedS -- 2020-01-08 14:49 
+Added login/registration pages in templates folder & fixed-top
