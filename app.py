@@ -2,8 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from functools import wraps
 from flask_sqlalchemy import SQLAlchemy
 from config import Config
-import sqlite3
-import os
+from utl import models
+db = models.db
 
 app = Flask(__name__)
 app.config.from_object(Config)
