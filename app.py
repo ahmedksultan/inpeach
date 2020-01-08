@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from config import Config
 from utl import models
 db = models.db
+from utl import api
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -14,7 +15,7 @@ def root():
 
 @app.route("/home")
 def home():
-    return render_template("home.html", user="Ahmed")
+    return render_template("home.html", user="Ahmed", weather=api.getCurrentWeather())
 
 @app.route("/activity")
 def activity():

@@ -1,12 +1,35 @@
 {% extends "base.html" %}
 
 {% block loginoptions %}
-     <button type="button" class="btn btn-outline-warning">Logout</button>
+    <form class="form-inline my-2 my-lg-0" action="/logout">
+        <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Logout</button>
+    </form>
 {% endblock %}
 
 {% block body %}
-     <div class="content">
-          <h1 class="display-3" style="font-weight: 700; padding-left: 5vw; padding-top: 5vh;">Welcome, {{ user }}.</h1>
+     <div class="container text-center p-4">
+          <h1 class="display-4">Welcome, {{ user }}.</h1>
+     </div>
+     <div class="container text-center p-4">
+         <h3>Today's Weather</h3>
+         <img src="https://www.metaweather.com/static/img/weather/{{ weather['weather_state_abbr'] }}.svg" alt="weather icon" width=50>
+         <p class="m-0"><b>{{ weather['weather_state_name'] }}</b></p>
+         <p class="m-0"><b>Temperature Now:</b> {{ weather['the_temp'] }}° F</p>
+         <p class="m-0"><b>Minimum Temperature:</b> {{ weather['min_temp'] }}° F</p>
+         <p class="m-0"><b>Maximum Temperature:</b> {{ weather['max_temp'] }}° F</p>
+     </div>
+     <div class="container text-center p-4">
+         <div class="row">
+            <div class="col-md">
+                <a href="https://stuy.enschool.org" class="btn btn-outline-danger">Stuyvesant High School Website</a>
+            </div>
+            <div class="col-md">
+                <a href="https://talos.stuy.edu" class="btn btn-outline-primary">Talos</a>
+            </div>
+            <div class="col-md">
+                <a href="https://www.stuyactivities.org" class="btn btn-outline-danger">StuyActivites</a>
+            </div>
+         </div>
      </div>
 {% endblock %}
 

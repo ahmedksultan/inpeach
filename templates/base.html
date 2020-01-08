@@ -7,15 +7,27 @@
     <link rel="stylesheet" href="../static/css/style.css">
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a class="navbar-brand" href="/"><b>Oikos</b></a>
-      <a class="nav-item nav-link" href="/activity">Activity</a>
-      <a class="nav-item nav-link" href="/friends">Friends</a>
-      <a class="nav-item nav-link" href="/communities">Communities</a>
-      <a class="nav-item nav-link" href="/messages">Messages</a>
-
-      {% block loginoptions %} {% endblock %}
+      <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="/dashboard"><b>Oikos</b></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-item nav-link" href="/activity">Activity</a></li>
+            <li class="nav-item">
+                <a class="nav-item nav-link" href="/friends">Friends</a></li>
+            <li class="nav-item">
+                <a class="nav-item nav-link" href="/communities">Communities</a></li>
+            <li class="nav-item">
+                <a class="nav-item nav-link" href="/messages">Messages</a></li>
+          </ul>
+          {% block loginoptions %} {% endblock %}
+        </div>
     </nav>
+</header>
 
     {% block body %} {% endblock %}
 
