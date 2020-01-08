@@ -21,9 +21,9 @@ def login():
 def register():
     return render_template("signup.html")
 
-@app.route("/home")
+@app.route("/dashboard")
 def home():
-    return render_template("home.html", user="Ahmed", weather=api.getCurrentWeather())
+    return render_template("dashboard.html", user="Ahmed", weather=api.getCurrentWeather())
 
 @app.route("/activity")
 def activity():

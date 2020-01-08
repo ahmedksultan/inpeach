@@ -13,3 +13,7 @@
 .navbar .navbar-brand {
      font-size: 36px;
 }
+
+.border-primary {
+     border-color: indigo !important;
+}

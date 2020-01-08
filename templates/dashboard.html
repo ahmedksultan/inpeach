@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block loginoptions %}
+    <form class="form-inline my-2 my-lg-0" action="/logout">
+        <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Logout</button>
+    </form>
+{% endblock %}
+
+{% block body %}
+    <div class="content">
+        <h1 class="display-3" style="font-weight: 600; padding-left: 5vw; padding-top: 5vh;">Welcome, {{ user }}.</h1>
+    </div>
+
+    <div class="row" style="margin-left: 5vw; margin-right: 5vw; margin-top: 5vh;">
+        <!-- weather panel -->
+        <div class="container col-md-5 bg-light border border-primary" style="padding: 2em; border-radius: 1em;">
+            <img src="https://www.metaweather.com/static/img/weather/{{ weather['weather_state_abbr'] }}.svg" style="float: right;"
+                alt="weather icon" width=120>
+            <h3>Today's Weather</h3>
+            
+            <p class="m-0"><b>{{ weather['weather_state_name'] }}&nbsp;&nbsp;&nbsp;&nbsp;||</b>&nbsp;&nbsp;&nbsp;&nbsp;{{ weather['the_temp'] }}° F</p>
+            <p class="m-0"><b>High:</b> {{ weather['max_temp'] }}° F</p>
+            <p class="m-0"><b>Low:</b> {{ weather['min_temp'] }}° F</p>
+        </div>
+        <div class="container col-md-4 bg-light border border-primary" style="padding: 2em; border-radius: 1em;">
+            <img src="https://www.metaweather.com/static/img/weather/{{ weather['weather_state_abbr'] }}.svg"
+                style="float: right;" alt="weather icon" width=120>
+            <h3>Today's Weather</h3>
+        
+            <p class="m-0">
+                <b>{{ weather['weather_state_name'] }}&nbsp;&nbsp;&nbsp;&nbsp;||</b>&nbsp;&nbsp;&nbsp;&nbsp;{{ weather['the_temp'] }}°
+                F</p>
+            <p class="m-0"><b>High:</b> {{ weather['max_temp'] }}° F</p>
+            <p class="m-0"><b>Low:</b> {{ weather['min_temp'] }}° F</p>
+        </div>
+        <div class="container col-md-2 bg-light border border-primary" style="padding: 2em; border-radius: 1em;">
+            <img src="https://www.metaweather.com/static/img/weather/{{ weather['weather_state_abbr'] }}.svg"
+                style="float: right;" alt="weather icon" width=120>
+            <h3>Today's Weather</h3>
+        
+            <p class="m-0">
+                <b>{{ weather['weather_state_name'] }}&nbsp;&nbsp;&nbsp;&nbsp;||</b>&nbsp;&nbsp;&nbsp;&nbsp;{{ weather['the_temp'] }}°
+                F</p>
+            <p class="m-0"><b>High:</b> {{ weather['max_temp'] }}° F</p>
+            <p class="m-0"><b>Low:</b> {{ weather['min_temp'] }}° F</p>
+        </div>
+
+    </div>
+     
+     <div class="container text-center p-4">
+     </div>
+     <div class="container text-center p-4">
+         <div class="row">
+            <div class="col-md">
+                <a href="https://stuy.enschool.org" class="btn btn-outline-danger">Stuyvesant High School Website</a>
+            </div>
+            <div class="col-md">
+                <a href="https://talos.stuy.edu" class="btn btn-outline-primary">Talos</a>
+            </div>
+            <div class="col-md">
+                <a href="https://www.stuyactivities.org" class="btn btn-outline-danger">StuyActivites</a>
+            </div>
+         </div>
+     </div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
