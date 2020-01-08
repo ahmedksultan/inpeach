@@ -8,4 +8,4 @@ kaziJ -- 2020-01-07 22:21
 Created requirements.txt file.
 
 judeR -- 2020-01-05 23:04
-Fixed design doc to include new word community, as well as changed 1s to 0s and polished up typos, now is finalized
+Updated design document to replace instances of "group" in the database with "community", because group is a reserved keyword in SQLite. Started database primary keys with 0 instead of 1. Listed whether an API key is required for our APIs as suggested by the editors of our design document.
