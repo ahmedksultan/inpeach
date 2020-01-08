@@ -6,3 +6,6 @@ Uploaded first design document and PDFS of relevant API KB cards. Updated README
 
 kaziJ -- 2020-01-07 22:21
 Created requirements.txt file.
+
+judeR -- 2020-01-05 23:04
+Fixed design doc to include new word community, as well as changed 1s to 0s and polished up typos, now is finalized
