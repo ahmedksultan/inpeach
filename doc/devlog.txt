@@ -4,6 +4,15 @@ Team theyputhiminapeach formed, chose Jude Rizzo as project manager. Initialized
 judeR -- 2020-01-05 23:45
 Uploaded first design document and PDFS of relevant API KB cards. Updated README to display roles and APIs.
 
+kaziJ -- 2020-01-07 12:00
+Started experimenting with SQLAlchemy code. Set up the database with required models in a models.py file.
+
+kaziJ -- 2020-01-07 1:30
+Created a functions.py file that has various functions which modify the database and will be used in app.py as an import.
+
+kaziJ -- 2020-01-07 17:45
+Updated functions to include more functions relating to communities, users, friends, and comments. Fixed models import issue.
+
 kaziJ -- 2020-01-07 22:21
 Created requirements.txt file.
 
