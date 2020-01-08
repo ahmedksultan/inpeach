@@ -3,3 +3,6 @@ Team theyputhiminapeach formed, chose Jude Rizzo as project manager. Initialized
 
 judeR -- 2020-01-05 23:45
 Uploaded first design document and PDFS of relevant API KB cards. Updated README to display roles and APIs.
+
+kaziJ -- 2020-01-07 22:21
+Created requirements.txt file.
