@@ -13,6 +13,14 @@ app.config.from_object(Config)
 def root():
     return redirect(url_for('home')) # when login system is in place, will be changed
 
+@app.route("/login")
+def login():
+    return render_template("login.html")
+
+@app.route("/register")
+def register():
+    return render_template("signup.html")
+
 @app.route("/home")
 def home():
     return render_template("home.html", user="Ahmed", weather=api.getCurrentWeather())
