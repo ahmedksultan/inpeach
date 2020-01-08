@@ -19,7 +19,27 @@ def root():
     newcommunity2 = Community(name="name2", description="description2")
     db.session.add(newcommunity2)
     db.session.commit()
-    return __name__
+    return redirect(url_for('home')) # when login system is in place, will be changed
+
+@app.route("/home")
+def home():
+    return render_template("home.html", user="Ahmed")
+
+@app.route("/activity")
+def activity():
+    return render_template("activity.html", user="Ahmed")
+
+@app.route("/friends")
+def friends():
+    return render_template("friends.html", user="Ahmed")
+
+@app.route("/communities")
+def communities():
+    return render_template("communities.html", user="Ahmed")
+
+@app.route("/messages")
+def messages():
+    return "Work in progress!"
 
 if __name__ == "__main__":
     db.init_app(app)

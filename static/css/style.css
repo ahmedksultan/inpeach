@@ -2,10 +2,6 @@
      background-color: indigo !important;
 }
 
-.navbar {
-     padding: 2% !important;
-}
-
 .nav-item {
      color: white;
 }
@@ -16,4 +12,8 @@
 
 .navbar .navbar-brand {
      font-size: 36px;
+}
+
+.content {
+     background: blue;
 }

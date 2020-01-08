@@ -8,16 +8,15 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a class="navbar-brand" href="#"><b>Oikos</b></a>
-      <a class="nav-item nav-link" href="#">Home</a>
-      <a class="nav-item nav-link" href="#">Features</a>
-      <a class="nav-item nav-link" href="#">Pricing</a>
-      <a class="nav-item nav-link" href="#">Disabled</a>
+      <a class="navbar-brand" href="/"><b>Oikos</b></a>
+      <a class="nav-item nav-link" href="/activity">Activity</a>
+      <a class="nav-item nav-link" href="/friends">Friends</a>
+      <a class="nav-item nav-link" href="/communities">Communities</a>
+      <a class="nav-item nav-link" href="/messages">Messages</a>
 
-      {% block loginoptions %}
-      {% endblock %}
-
+      {% block loginoptions %} {% endblock %}
     </nav>
+
     {% block body %} {% endblock %}
 
     {% block footer %} {% endblock %}
