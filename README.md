@@ -31,7 +31,6 @@ $ . ~/<name of virtual environment>/bin/activate
 ```
 
 #### To run the project: 
-Note: No API keys are needed for this project to run, so this should run without any issues.
 ```bash
 $ cd <name of cloned directory>
 /<name of cloned directory>$ python3 app.py 
