@@ -29,7 +29,10 @@ judeR -- 2020-01-07 23:04
 Updated design document to replace instances of "group" in the database with "community", because group is a reserved keyword in SQLite. Started database primary keys with 0 instead of 1. Listed whether an API key is required for our APIs as suggested by the editors of our design document.
 
 kevinC -- 2020-01-08 06:54
-Added login page and logic for signup/login on app.py
+Added login page and logic for signup/login on app.py.
 
 ahmedS -- 2020-01-08 14:49 
-Added login/registration pages in templates folder & fixed-top
+Added login/registration pages in templates folder & fixed-top.
+
+kaziJ -- 2020-01-08 19:57
+Updated README.md to have project description.
