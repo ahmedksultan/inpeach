@@ -62,21 +62,21 @@ def communities():
 @app.route("/messages/")
 @login_required
 def messages():
-    friendslist = friendsfunctions.getFriends(1)
+    friendslist = friendsfunctions.getFriends(session['userID'])
     return render_template("messages.html", friends=friendslist)
 
 @app.route("/messages/<contactID>")
 @login_required
 def chat(contactID):
     contact = usersfunctions.getUser(contactID)
-    chat = messagesfunctions.getMessages(1, contactID)
-    return render_template("chat.html", userID = 1, contact=contact, messages=chat)
+    chat = messagesfunctions.getMessages(session['userID'], contactID)
+    return render_template("chat.html", userID = session['userID'], contact=contact, messages=chat)
 
 @app.route("/sendmessage/<contactID>", methods=["POST"])
 @login_required
 def sendmessage(contactID):
     content = request.form['content']
-    messagesfunctions.sendMessage(1, contactID, content)
+    messagesfunctions.sendMessage(session['userID'], contactID, content)
     return redirect(url_for('chat', contactID=contactID))
 
 @app.route("/login")
@@ -121,7 +121,7 @@ def auth():
         return redirect(url_for('login'))
     else: # hooray! the username and password are both valid
         session['userID'] = user.userID
-        session['username'] = user.firstName + user.lastName
+        session['username'] = user.firstName + ' ' + user.lastName
         flash("Welcome, "+session['username']+". You have been logged in successfully.", "success")
         return redirect(url_for('dashboard'))
 
