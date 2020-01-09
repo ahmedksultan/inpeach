@@ -117,8 +117,8 @@ def auth():
         return redirect(url_for('login'))
     else: # hooray! the username and password are both valid
         session['userID'] = user.userID
-        session['username'] = username
-        flash("Welcome " + username + ". You have been logged in successfully.", "success")
+        session['username'] = user.fname + user.lname
+        flash("Welcome. You have been logged in successfully.", "success")
         return redirect(url_for('dashboard'))
 
 @app.route("/logout")
