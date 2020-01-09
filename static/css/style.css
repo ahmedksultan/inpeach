@@ -2,6 +2,9 @@
      background-color: indigo !important;
 }
 
+.border-primary {
+    color: indigo !important;
+}
 .nav-item {
      color: white;
 }
