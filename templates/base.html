@@ -33,7 +33,14 @@
     <br>
     <br>
 </header>
-
+{% for message in get_flashed_messages() %}
+<br><br>
+<div class="my-3 container text-center">
+  <div class="alert alert-primary" role="alert">
+    <center><b>{{ message }}</b></center>
+  </div>
+</div>
+{% endfor %}
     {% block body %} {% endblock %}
 
     {% block footer %} {% endblock %}

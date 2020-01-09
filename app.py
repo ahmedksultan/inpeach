@@ -111,13 +111,13 @@ def register():
     email = request.form['email']
     pass1 = request.form['password']
     pass2 = request.form['confpassword']
-    fname = request.form['first']
-    lname = request.form['last']
-    grade = request.form['grade']
+    if usersfunctions.getUserByEmail(email) != None:
+        flash("Account with that email already exsists", "error")
+        return redirect(url_for('signup'))
     if pass1 != pass2 :
         flash("Passwords do not match", "error")
         return redirect(url_for('signup'))
-    usersfunctions.registerUser(email,pass1,fname,lname,grade)
+    usersfunctions.registerUser(email,pass1,request.form['first'],request.form['last'],request.form['grade'])
     return redirect(url_for('login'))
 
 @app.route("/auth", methods=["POST"])
@@ -126,14 +126,12 @@ def auth():
         flash("You were already logged in, "+session['displayName']+".", "error")
         return redirect(url_for('feed'))
     # information inputted into the form by the user
-    email = request.form['email']
-    password = request.form['password']
-    user = usersfunctions.getUserByEmail(email)
+    user = usersfunctions.getUserByEmail(request.form['email'])
 
     if user == None: # if email not found
         flash("No user found with given email", "error")
         return redirect(url_for('login'))
-    elif password != user.password: # if password is incorrect
+    elif request.form['password'] != user.password: # if password is incorrect
         flash("Incorrect password", "error")
         return redirect(url_for('login'))
     else: # hooray! the email and password are both valid
