@@ -5,6 +5,9 @@
 - Kazi Jamal: Messages and Friend Manager
 - Ahmed Sultan: Dashboard and Feed Developer
 
+## Project Description
+Our project aims to create a Stuyvesant-centered social media web application, replacing previous means of communication (i.e. Facebook) and providing an experience catered to Stuyvesant students.
+
 ## APIs Utilized
 - MetaWeather API: https://docs.google.com/document/d/18uyXB5XPFQoGFJpoa2yQvRPhevc3HaBU4kO-OYN-ieY/edit
 - News API: https://docs.google.com/document/d/1sLb7KpsBcx1_dCzuLicWvnSaQJRepZ1YM12tMxbj2RA/edit
