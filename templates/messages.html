@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block loginoptions %}
+    <form class="form-inline my-2 my-lg-0" action="/logout">
+        <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Logout</button>
+    </form>
+{% endblock %}
+
+{% block body %}
+    <div class="content">
+        <h1 class="display-3" style="font-weight: 600; padding-left: 5vw; padding-top: 5vh;">Your Messages</h1>
+    </div>
+
+    <div class="container">
+        <ul>
+            {% for friend in friends %}
+                <li><a href="/messages/{{ friend.friendID }}">{{ friend.displayName }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

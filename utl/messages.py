@@ -7,7 +7,7 @@ def getMessages(userID, contactID):
     # messages.append(sentMessages)
     # messages.append(receivedMessages)
     # return messages
-    messages = Message.query.filter(((Message.senderID=userID) & (Message.receiverID=contactID))|((Message.senderID=contactID) & (Message.receiverID=receiverID))).order_by(Message.timestamp.asc())
+    messages = Message.query.filter(((Message.senderID==userID) & (Message.receiverID==contactID)) | ((Message.senderID==contactID) & (Message.receiverID==userID))).order_by(Message.timestamp.asc())
     return messages
 
 def sendMessage(senderID, receiverID, content):

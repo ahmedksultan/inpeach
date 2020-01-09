@@ -5,6 +5,9 @@ from config import Config
 from utl import models
 db = models.db
 from utl import api
+from utl import friends as friendsfunctions
+from utl import messages as messagesfunctions
+from utl import users as usersfunctions
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -31,15 +34,29 @@ def activity():
 
 @app.route("/friends")
 def friends():
-    return render_template("friends.html", user="Ahmed")
+    friendslist = friendsfunctions.getFriends(1)
+    return render_template("friends.html", friends=friendslist)
 
 @app.route("/communities")
 def communities():
     return render_template("communities.html", user="Ahmed")
 
-@app.route("/messages")
+@app.route("/messages/")
 def messages():
-    return "Work in progress!"
+    friendslist = friendsfunctions.getFriends(1)
+    return render_template("messages.html", friends=friendslist)
+
+@app.route("/messages/<contactID>")
+def chat(contactID):
+    contact = usersfunctions.getUser(contactID)
+    chat = messagesfunctions.getMessages(1, contactID)
+    return render_template("chat.html", userID = 1, contact=contact, messages=chat)
+
+@app.route("/sendmessage/<contactID>", methods=["POST"])
+def sendmessage(contactID):
+    content = request.form['content']
+    messagesfunctions.sendMessage(1, contactID, content)
+    return redirect(url_for('chat', contactID=contactID))
 
 if __name__ == "__main__":
     db.init_app(app)
