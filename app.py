@@ -4,6 +4,14 @@ from flask_sqlalchemy import SQLAlchemy
 from config import Config
 from utl import api, models, messages, comments, communities, friends, posts, users
 db = models.db
+<<<<<<< HEAD
+=======
+from utl import api
+from utl import friends as friendsfunctions
+from utl import messages as messagesfunctions
+from utl import users as usersfunctions
+
+>>>>>>> 48e5775572aa2b3fd1eec29ea8430f131059eebd
 app = Flask(__name__)
 app.config.from_object(Config)
 
@@ -23,10 +31,24 @@ def root():
     else:
         return redirect(url_for('login'))
 
+<<<<<<< HEAD
 @app.route("/dashboard")
 @login_required
 def dashboard():
     return render_template("dashboard.html", user=session['username'], weather=api.getCurrentWeather())
+=======
+@app.route("/login")
+def login():
+    return render_template("login.html")
+
+@app.route("/register")
+def register():
+    return render_template("signup.html")
+
+@app.route("/dashboard")
+def home():
+    return render_template("dashboard.html", user="Ahmed", weather=api.getCurrentWeather())
+>>>>>>> 48e5775572aa2b3fd1eec29ea8430f131059eebd
 
 @app.route("/feed")
 @login_required
@@ -36,17 +58,35 @@ def activity():
 @app.route("/friends")
 @login_required
 def friends():
-    return render_template("friends.html", user=session['username'])
+    friendslist = friendsfunctions.getFriends(1)
+    return render_template("friends.html", friends=friendslist)
+
+@app.route("/profile/<userID>")
+def profile(userID):
+    user = usersfunctions.getUser(userID)
+    return render_template("profile.html", user=user)
 
 @app.route("/communities")
 @login_required
 def communities():
     return render_template("communities.html", user=session['username'])
 
-@app.route("/messages")
-@login_required
+@app.route("/messages/")
 def messages():
-    return "Work in progress!"
+    friendslist = friendsfunctions.getFriends(1)
+    return render_template("messages.html", friends=friendslist)
+
+@app.route("/messages/<contactID>")
+def chat(contactID):
+    contact = usersfunctions.getUser(contactID)
+    chat = messagesfunctions.getMessages(1, contactID)
+    return render_template("chat.html", userID = 1, contact=contact, messages=chat)
+
+@app.route("/sendmessage/<contactID>", methods=["POST"])
+def sendmessage(contactID):
+    content = request.form['content']
+    messagesfunctions.sendMessage(1, contactID, content)
+    return redirect(url_for('chat', contactID=contactID))
 
 @app.route("/login")
 def login():

@@ -8,7 +8,8 @@ class User(db.Model):
     email = db.Column(db.Text, unique=True, nullable=False)
     password = db.Column(db.Text, nullable=False)
     firstName = db.Column(db.Text, nullable=False)
-    lastname = db.Column(db.Text, nullable=False)
+    lastName = db.Column(db.Text, nullable=False)
+    displayName = db.Column(db.Text, nullable=False)
     grade = db.Column(db.Text, nullable=False)
 
 class Community(db.Model):
