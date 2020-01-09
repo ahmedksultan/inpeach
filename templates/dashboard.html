@@ -15,14 +15,17 @@
     <!-- weather panel -->
     <div class="container col-md-5 bg-light border border-primary" style="padding: 2em; border-radius: 1em;">
         <img src="https://www.metaweather.com/static/img/weather/{{ weather['weather_state_abbr'] }}.svg"
-            style="float: right;" alt="weather icon" width=120>
-        <h3>Today's Weather</h3>
+            style="float: right;" alt="weather icon" width=160>
+        <h3>Today's weather</h3>
 
         <p class="m-0">
             <b>{{ weather['weather_state_name'] }}&nbsp;&nbsp;&nbsp;&nbsp;||</b>&nbsp;&nbsp;&nbsp;&nbsp;{{ weather['the_temp'] }}°
             F</p>
         <p class="m-0"><b>High:</b> {{ weather['max_temp'] }}° F</p>
         <p class="m-0"><b>Low:</b> {{ weather['min_temp'] }}° F</p>
+        <br>
+        <p><i>New York, NY</i></p>
+
     </div>
     <div class="container col-md-4 bg-light border border-primary" style="padding: 2em; border-radius: 1em;">
         <img src="https://www.metaweather.com/static/img/weather/{{ weather['weather_state_abbr'] }}.svg"
@@ -36,34 +39,24 @@
         <p class="m-0"><b>Low:</b> {{ weather['min_temp'] }}° F</p>
     </div>
     <div class="container col-md-2 bg-light border border-primary" style="padding: 2em; border-radius: 1em;">
-        <img src="https://www.metaweather.com/static/img/weather/{{ weather['weather_state_abbr'] }}.svg"
-            style="float: right;" alt="weather icon" width=120>
-        <h3>Today's Weather</h3>
-
-        <p class="m-0">
-            <b>{{ weather['weather_state_name'] }}&nbsp;&nbsp;&nbsp;&nbsp;||</b>&nbsp;&nbsp;&nbsp;&nbsp;{{ weather['the_temp'] }}°
-            F</p>
-        <p class="m-0"><b>High:</b> {{ weather['max_temp'] }}° F</p>
-        <p class="m-0"><b>Low:</b> {{ weather['min_temp'] }}° F</p>
+            <div class="container text-center p-4">
+                <div class="row" style="padding-bottom: 5%;">
+                    <a href="https://stuy.enschool.org" class="btn btn-outline-danger w-100">Stuy website</a>
+                </div>
+                <div class="row" style="padding-bottom: 5%;">
+                    <a href="https://www.stuyactivities.org" class="btn btn-outline-danger w-100">StuyActivites</a>
+                </div>
+                <div class="row">
+                    <a href="https://talos.stuy.edu" class="btn btn-outline-primary w-100">Talos</a>
+                </div>
+            </div>
     </div>
 
 </div>
 
 <div class="container text-center p-4">
 </div>
-<div class="container text-center p-4">
-    <div class="row">
-        <div class="col-md">
-            <a href="https://stuy.enschool.org" class="btn btn-outline-danger">Stuyvesant High School Website</a>
-        </div>
-        <div class="col-md">
-            <a href="https://talos.stuy.edu" class="btn btn-outline-primary">Talos</a>
-        </div>
-        <div class="col-md">
-            <a href="https://www.stuyactivities.org" class="btn btn-outline-danger">StuyActivites</a>
-        </div>
-    </div>
-</div>
+
 {% endblock %}
 
 {% block footer %}
