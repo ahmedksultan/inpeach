@@ -39,3 +39,6 @@ Updated README.md to have project description.
 
 kaziJ -- 2020-01-08 23:59
 Created functional messages and chat pages for testing.
+
+kaziJ -- 2020-01-09 08:40
+Updated friends and messages pages.
