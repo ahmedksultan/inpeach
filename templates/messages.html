@@ -14,7 +14,13 @@
     <div class="container">
         <ul>
             {% for friend in friends %}
-                <li><a href="/messages/{{ friend.friendID }}">{{ friend.displayName }}</a></li>
+            <div class="card m-3">
+                <h5 class="card-header">{{ friend.displayName }}</h5>
+                <div class="card-body">
+                  <a href="/profile/{{ friend.friendID }}" class="btn btn-warning">View Profile</a>
+                  <a href="/messages/{{ friend.friendID }}" class="btn btn-warning">Message</a>
+                </div>
+              </div>
             {% endfor %}
         </ul>
     </div>

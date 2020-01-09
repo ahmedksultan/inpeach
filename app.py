@@ -37,6 +37,11 @@ def friends():
     friendslist = friendsfunctions.getFriends(1)
     return render_template("friends.html", friends=friendslist)
 
+@app.route("/profile/<userID>")
+def profile(userID):
+    user = usersfunctions.getUser(userID)
+    return render_template("profile.html", user=user)
+
 @app.route("/communities")
 def communities():
     return render_template("communities.html", user="Ahmed")
