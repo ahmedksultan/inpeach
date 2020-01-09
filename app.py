@@ -49,6 +49,7 @@ def friends():
     return render_template("friends.html", friends=friendslist)
 
 @app.route("/profile/<userID>")
+@login_required
 def profile(userID):
     user = usersfunctions.getUser(userID)
     return render_template("profile.html", user=user)
@@ -59,17 +60,20 @@ def communities():
     return render_template("communities.html", user=session['username'])
 
 @app.route("/messages/")
+@login_required
 def messages():
     friendslist = friendsfunctions.getFriends(1)
     return render_template("messages.html", friends=friendslist)
 
 @app.route("/messages/<contactID>")
+@login_required
 def chat(contactID):
     contact = usersfunctions.getUser(contactID)
     chat = messagesfunctions.getMessages(1, contactID)
     return render_template("chat.html", userID = 1, contact=contact, messages=chat)
 
 @app.route("/sendmessage/<contactID>", methods=["POST"])
+@login_required
 def sendmessage(contactID):
     content = request.form['content']
     messagesfunctions.sendMessage(1, contactID, content)
@@ -117,8 +121,8 @@ def auth():
         return redirect(url_for('login'))
     else: # hooray! the username and password are both valid
         session['userID'] = user.userID
-        session['username'] = user.fname + user.lname
-        flash("Welcome. You have been logged in successfully.", "success")
+        session['username'] = user.firstName + user.lastName
+        flash("Welcome, "+session['username']+". You have been logged in successfully.", "success")
         return redirect(url_for('dashboard'))
 
 @app.route("/logout")
