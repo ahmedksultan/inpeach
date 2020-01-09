@@ -18,3 +18,7 @@ def getUserByEmail(email):
 def getUser(userID):
     user = User.query.filter_by(userID=userID).first()
     return user
+
+def searchUsers(query):
+    users = User.query.filter(User.displayName.like('%' + query + '%'))
+    return users

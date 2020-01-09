@@ -35,18 +35,35 @@ def root():
 @app.route("/dashboard")
 @login_required
 def dashboard():
-    return render_template("dashboard.html", user=session['username'], weather=api.getCurrentWeather())
+    return render_template("dashboard.html", user=session['displayName'], weather=api.getCurrentWeather())
 
 @app.route("/feed")
 @login_required
 def activity():
-    return render_template("feed.html", user=session['username'])
+    return render_template("feed.html", user=session['displayName'])
 
 @app.route("/friends")
 @login_required
 def friends():
-    friendslist = friendsfunctions.getFriends(1)
-    return render_template("friends.html", friends=friendslist)
+    friendslist = friendsfunctions.getFriends(session['userID'])
+    users = []
+    for friend in friendslist:
+        users.append(usersfunctions.getUser(friend.friendID))
+    return render_template("friends.html", users=users)
+
+@app.route("/searchfriends", methods=["POST"])
+@login_required
+def searchfriends():
+    query = request.form['query']
+    users = usersfunctions.searchUsers(query)
+    return render_template("friends.html", users=users)
+
+# @app.route("/sendfriendrequest/<receiverID>", methods=["POST"])
+# @login_required
+# def sendfriendrequest(receiverID):
+#     message = request.form['message']
+#     friendsfunctions.sendFriendRequest(sesion['userID'], receiverID, message)
+#     return redirect(url_for('friends'))
 
 @app.route("/profile/<userID>")
 @login_required
@@ -57,7 +74,7 @@ def profile(userID):
 @app.route("/communities")
 @login_required
 def communities():
-    return render_template("communities.html", user=session['username'])
+    return render_template("communities.html", user=session['displayName'])
 
 @app.route("/messages/")
 @login_required
@@ -106,23 +123,23 @@ def register():
 @app.route("/auth", methods=["POST"])
 def auth():
     if "userID" in session:
-        flash("You were already logged in, "+session['username']+".", "error")
+        flash("You were already logged in, "+session['displayName']+".", "error")
         return redirect(url_for('feed'))
     # information inputted into the form by the user
     email = request.form['email']
     password = request.form['password']
     user = usersfunctions.getUserByEmail(email)
 
-    if user == None: # if username not found
-        flash("No user found with given username", "error")
+    if user == None: # if email not found
+        flash("No user found with given email", "error")
         return redirect(url_for('login'))
     elif password != user.password: # if password is incorrect
         flash("Incorrect password", "error")
         return redirect(url_for('login'))
-    else: # hooray! the username and password are both valid
+    else: # hooray! the email and password are both valid
         session['userID'] = user.userID
-        session['username'] = user.firstName + ' ' + user.lastName
-        flash("Welcome, "+session['username']+". You have been logged in successfully.", "success")
+        session['displayName'] = user.firstName + ' ' + user.lastName
+        flash("Welcome, "+session['displayName']+". You have been logged in successfully.", "success")
         return redirect(url_for('dashboard'))
 
 @app.route("/logout")
@@ -131,7 +148,7 @@ def logout():
         flash("Already logged out, no need to log out again", "error")
     else:
         session.pop('userID')
-        session.pop('username')
+        session.pop('displayName')
         flash("Successfuly logged out", "success")
     return redirect(url_for('root')) # should redirect back to login
 
