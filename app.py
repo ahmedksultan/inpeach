@@ -2,18 +2,19 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from functools import wraps
 from flask_sqlalchemy import SQLAlchemy
 from config import Config
-from utl import api, models, messages, comments, communities, friends, posts, users
-db = models.db
-<<<<<<< HEAD
-=======
+from utl import models, comments, communities, posts
 from utl import api
 from utl import friends as friendsfunctions
 from utl import messages as messagesfunctions
 from utl import users as usersfunctions
+import os
 
->>>>>>> 48e5775572aa2b3fd1eec29ea8430f131059eebd
+
+db = models.db
 app = Flask(__name__)
 app.config.from_object(Config)
+#creates secret key for sessions
+app.secret_key = os.urandom(32)
 
 #decorator that redirects user to login page if not logged in
 def login_required(f):
@@ -31,24 +32,10 @@ def root():
     else:
         return redirect(url_for('login'))
 
-<<<<<<< HEAD
 @app.route("/dashboard")
 @login_required
 def dashboard():
     return render_template("dashboard.html", user=session['username'], weather=api.getCurrentWeather())
-=======
-@app.route("/login")
-def login():
-    return render_template("login.html")
-
-@app.route("/register")
-def register():
-    return render_template("signup.html")
-
-@app.route("/dashboard")
-def home():
-    return render_template("dashboard.html", user="Ahmed", weather=api.getCurrentWeather())
->>>>>>> 48e5775572aa2b3fd1eec29ea8430f131059eebd
 
 @app.route("/feed")
 @login_required
@@ -102,14 +89,14 @@ def register():
         return redirect(url_for('feed'))
     email = request.form['email']
     pass1 = request.form['password']
-    pass2 = request.form['password2']
+    pass2 = request.form['confpassword']
     fname = request.form['first']
     lname = request.form['last']
     grade = request.form['grade']
     if pass1 != pass2 :
         flash("Passwords do not match", "error")
         return redirect(url_for('signup'))
-    users.registerUser()
+    usersfunctions.registerUser(email,pass1,fname,lname,grade)
     return redirect(url_for('login'))
 
 @app.route("/auth", methods=["POST"])
@@ -120,7 +107,7 @@ def auth():
     # information inputted into the form by the user
     email = request.form['email']
     password = request.form['password']
-    user = users.getUser(email)
+    user = usersfunctions.getUserByEmail(email)
 
     if user == None: # if username not found
         flash("No user found with given username", "error")
