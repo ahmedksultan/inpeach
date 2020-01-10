@@ -8,6 +8,13 @@ def getCommunities(userID):
         communities.append(community)
     return community
 
+def inCommunity(userID, communityID):
+    members = Member.query.filter_by(userID=userID).all()
+    for member in members:
+        if(member.communityID == communityID):
+            return true;
+    return false;
+
 def createCommunity(name, description):
     community = Community(name=name, description=description)
     db.session.add(community)

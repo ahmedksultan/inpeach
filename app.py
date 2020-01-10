@@ -2,8 +2,9 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from functools import wraps
 from flask_sqlalchemy import SQLAlchemy
 from config import Config
-from utl import models, comments, communities, posts
+from utl import models, comments, posts
 from utl import api
+from utl import communities as communitiesfunctions
 from utl import friends as friendsfunctions
 from utl import messages as messagesfunctions
 from utl import users as usersfunctions
@@ -76,6 +77,24 @@ def profile(userID):
 def communities():
     return render_template("communities.html", user=session['displayName'])
 
+@app.route("/joincommunity/<groupID>", methods = ["POST"])
+@login_required
+def joincommunity(groupID):
+    communitiesfunctions.joinCommunity(session['userID'], groupID)
+    return redriect(url_for("/communities"))
+
+@app.route("/leavecommunity/<groupID>", methods = ["POST"])
+@login_required
+def leavecommunity(groupID):
+    communitiesfunctions.leaveCommunity(session['userID'], groupID)
+    return redriect(url_for("/communities"))
+
+@app.route("/community/<groupID>")
+@login_required
+def community(groupID):
+    incommunity = communitiesfunctions.inCommunity(session['userID'])
+    return render_template("community.html", loggedin = communitiesfunctions.inCommunity(session['userID']))
+
 @app.route("/messages/")
 @login_required
 def messages():
@@ -95,6 +114,11 @@ def sendmessage(contactID):
     content = request.form['content']
     messagesfunctions.sendMessage(session['userID'], contactID, content)
     return redirect(url_for('chat', contactID=contactID))
+
+@app.route("/me")
+@login_required
+def myfeed():
+    return render_template("me.html")
 
 @app.route("/login")
 def login():
