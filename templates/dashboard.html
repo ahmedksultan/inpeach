@@ -16,7 +16,7 @@
     <div class="container col-md-5 bg-light border border-primary" style="padding: 2em; border-radius: 1em;">
         <img src="https://www.metaweather.com/static/img/weather/{{ weather['weather_state_abbr'] }}.svg"
             style="float: right;" alt="weather icon" width=160>
-        <h3>Today's weather</h3>
+        <h3>Today's Weather</h3>
 
         <p class="m-0">
             <b>{{ weather['weather_state_name'] }}&nbsp;&nbsp;&nbsp;&nbsp;||</b>&nbsp;&nbsp;&nbsp;&nbsp;{{ weather['the_temp'] }}°
@@ -37,6 +37,8 @@
             F</p>
         <p class="m-0"><b>High:</b> {{ weather['max_temp'] }}° F</p>
         <p class="m-0"><b>Low:</b> {{ weather['min_temp'] }}° F</p>
+        <br>
+        <p><i>New York, NY</i></p>
     </div>
     <div class="container col-md-2 bg-light border border-primary" style="padding: 2em; border-radius: 1em;">
             <div class="container text-center p-4">
