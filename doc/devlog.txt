@@ -42,3 +42,6 @@ Created functional messages and chat pages for testing.
 
 kaziJ -- 2020-01-09 08:40
 Updated friends and messages pages.
+
+kaziJ -- 2020-01-10 16:23
+Created me page and redirected profile page for current user to me page.

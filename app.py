@@ -116,10 +116,13 @@ def declinefriendrequest(requestID):
 @app.route("/profile/<userID>")
 @login_required
 def profile(userID):
-    user = usersfunctions.getUser(userID)
-    isFriend = friendsfunctions.isFriend(session['userID'], userID)
-    print(isFriend)
-    return render_template("profile.html", user=user, isFriend=isFriend)
+    currentuserID = session['userID']
+    if currentuserID == int(userID):
+        return redirect(url_for('myfeed'))
+    else: 
+        user = usersfunctions.getUser(userID)
+        isFriend = friendsfunctions.isFriend(currentuserID, userID)
+        return render_template("profile.html", user=user, isFriend=isFriend)
 
 @app.route("/communities")
 @login_required
@@ -167,7 +170,8 @@ def sendmessage(contactID):
 @app.route("/me")
 @login_required
 def myfeed():
-    return render_template("me.html")
+    user = usersfunctions.getUser(session['userID'])
+    return render_template("me.html", user=user)
 
 @app.route("/login")
 def login():
