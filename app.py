@@ -36,12 +36,12 @@ def root():
 @app.route("/dashboard")
 @login_required
 def dashboard():
-    return render_template("dashboard.html", user=session['displayName'], weather=api.getCurrentWeather())
+    return render_template("dashboard.html", user=session['firstName'], weather=api.getCurrentWeather())
 
 @app.route("/feed")
 @login_required
 def feed():
-    return render_template("feed.html", user=session['displayName'])
+    return render_template("feed.html")
 
 @app.route("/friends")
 @login_required
@@ -210,6 +210,8 @@ def auth():
         return redirect(url_for('login'))
     else: # hooray! the email and password are both valid
         session['userID'] = user.userID
+        session['firstName'] = user.firstName
+        session['lastName'] = user.lastName
         session['displayName'] = user.firstName + ' ' + user.lastName
         return redirect(url_for('dashboard'))
 
@@ -219,6 +221,8 @@ def logout():
         flash("Already logged out, no need to log out again", "error")
     else:
         session.pop('userID')
+        session.pop('firstName')
+        session.pop('lastName')
         session.pop('displayName')
         flash("Successfuly logged out", "success")
     return redirect(url_for('root')) # should redirect back to login
