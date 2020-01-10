@@ -8,8 +8,12 @@ def getFriendRequests(userID):
     friendrequests = FriendRequest.query.filter_by(receiverID=userID).order_by(FriendRequest.timestamp.desc()).all()
     return friendrequests
 
-def sendFriendRequest(senderID, receiverID, message):
-    friendrequest = FriendRequest(senderID=senderID, receiverID=receiverID, message=message)
+def getPendingFriendRequests(userID):
+    friendrequests = FriendRequest.query.filter_by(senderID=userID).order_by(FriendRequest.timestamp.desc()).all()
+    return friendrequests
+
+def sendFriendRequest(senderID, receiverID):
+    friendrequest = FriendRequest(senderID=senderID, receiverID=receiverID)
     db.session.add(friendrequest)
     db.session.commit()
 
@@ -24,7 +28,11 @@ def acceptFriendRequest(requestID):
     db.session.add(friend2)
     db.session.commit()
 
-def rejectFriendRequest(requestID):
+def declineFriendRequest(requestID):
     friendrequest = FriendRequest.query.filter_by(requestID=requestID).first()
     db.session.delete(friendrequest)
     db.session.commit()
+
+def isFriend(userID, friendID):
+    friend = Friend.query.filter_by(userID=userID, friendID=friendID).first()
+    return friend != None

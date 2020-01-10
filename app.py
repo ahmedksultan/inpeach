@@ -45,11 +45,21 @@ def feed():
 @app.route("/friends")
 @login_required
 def friends():
-    friendslist = friendsfunctions.getFriends(session['userID'])
+    userID = session['userID']
+    friendslist = friendsfunctions.getFriends(userID)
     users = []
     for friend in friendslist:
         users.append(usersfunctions.getUser(friend.friendID))
-    return render_template("friends.html", users=users)
+    reqs = friendsfunctions.getFriendRequests(userID)
+    friendrequests = {}
+    for req in reqs:
+        friendrequests[req] = usersfunctions.getUser(req.senderID)
+    preqs = friendsfunctions.getPendingFriendRequests(userID)
+    pendingfriendrequests = {}
+    for preq in preqs:
+        pendingfriendrequests[preq] = usersfunctions.getUser(preq.receiverID)
+    print(pendingfriendrequests)
+    return render_template("friends.html", users=users, friendrequests=friendrequests, pendingfriendrequests=pendingfriendrequests)
 
 @app.route("/searchfriends", methods=["POST"])
 @login_required
@@ -58,18 +68,37 @@ def searchfriends():
     users = usersfunctions.searchUsers(query)
     return render_template("friends.html", users=users)
 
-# @app.route("/sendfriendrequest/<receiverID>", methods=["POST"])
-# @login_required
-# def sendfriendrequest(receiverID):
-#     message = request.form['message']
-#     friendsfunctions.sendFriendRequest(sesion['userID'], receiverID, message)
-#     return redirect(url_for('friends'))
+@app.route("/allusers")
+@login_required
+def allusers():
+    users = usersfunctions.getAllUsers()
+    return render_template("friends.html", users=users)
+
+@app.route("/sendfriendrequest/<receiverID>")
+@login_required
+def sendfriendrequest(receiverID):
+    friendsfunctions.sendFriendRequest(session['userID'], receiverID)
+    return redirect(url_for('friends'))
+
+@app.route("/acceptfriendrequest/<requestID>")
+@login_required
+def acceptfriendrequest(requestID):
+    friendsfunctions.acceptFriendRequest(requestID)
+    return redirect(url_for('friends'))
+
+@app.route("/declinefriendrequest/<requestID>")
+@login_required
+def declinefriendrequest(requestID):
+    friendsfunctions.declineFriendRequest(requestID)
+    return redirect(url_for('friends'))
 
 @app.route("/profile/<userID>")
 @login_required
 def profile(userID):
     user = usersfunctions.getUser(userID)
-    return render_template("profile.html", user=user)
+    isFriend = friendsfunctions.isFriend(session['userID'], userID)
+    print(isFriend)
+    return render_template("profile.html", user=user, isFriend=isFriend)
 
 @app.route("/communities")
 @login_required
