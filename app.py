@@ -190,6 +190,7 @@ def register():
     if pass1 != pass2 :
         flash("Passwords do not match", "error")
         return redirect(url_for('signup'))
+    flash("Account created successfuly. Please sign in", "success")
     usersfunctions.registerUser(email,pass1,request.form['first'],request.form['last'],request.form['grade'])
     return redirect(url_for('login'))
 
