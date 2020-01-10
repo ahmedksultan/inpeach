@@ -28,7 +28,7 @@ def login_required(f):
 @app.route("/")
 def root():
     if "userID" in session:
-        return redirect(url_for('feed'))
+        return redirect(url_for('dashboard'))
     else:
         return redirect(url_for('login'))
 
@@ -39,7 +39,7 @@ def dashboard():
 
 @app.route("/feed")
 @login_required
-def activity():
+def feed():
     return render_template("feed.html", user=session['displayName'])
 
 @app.route("/friends")
@@ -137,7 +137,6 @@ def auth():
     else: # hooray! the email and password are both valid
         session['userID'] = user.userID
         session['displayName'] = user.firstName + ' ' + user.lastName
-        flash("Welcome, "+session['displayName']+". You have been logged in successfully.", "success")
         return redirect(url_for('dashboard'))
 
 @app.route("/logout")
