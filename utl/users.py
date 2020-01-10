@@ -19,6 +19,10 @@ def getUser(userID):
     user = User.query.filter_by(userID=userID).first()
     return user
 
+def getAllUsers():
+    users = User.query.order_by(User.displayName.asc())
+    return users
+
 def searchUsers(query):
     users = User.query.filter(User.displayName.like('%' + query + '%'))
     return users

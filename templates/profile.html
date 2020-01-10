@@ -10,6 +10,9 @@
         <h3>Last Name: {{ user.lastName }}</h3>
         <h3>Email: {{ user.email }}</h3>
         <h3>Grade: {{ user.grade }}</h3>
+        {% if isFriend == False %}
+        <a href="/sendfriendrequest/{{ user.userID }}" class="btn btn-warning">Send Friend Request</a>
+        {% endif %}
     </div>
 {% endblock %}
 

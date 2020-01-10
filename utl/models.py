@@ -42,7 +42,6 @@ class FriendRequest(db.Model):
     requestID = db.Column(db.Integer, primary_key=True)
     senderID = db.Column(db.Integer, nullable=False)
     receiverID = db.Column(db.Integer, nullable=False)
-    message = db.Column(db.Text, nullable=True)
     timestamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
 class Friend(db.Model):
