@@ -10,18 +10,20 @@
             {% for message in messages %}
                 {% if message.senderID == userID %}
                     <div class="row no-gutters">
-                        <div class="col-md-3 offset-md-9">
+                        <div class="col-md-5 offset-md-7">
                             <div class="chat-bubble-right">
                                 {{ message.content }}
                             </div>
+                            <p>{{ message.timestamp }}</p>
                         </div>
                     </div>
                 {% else %}
                     <div class="row no-gutters">
-                        <div class="col-md-3">
+                        <div class="col-md-5">
                             <div class="chat-bubble-left">
                                 {{ message.content }}
                             </div>
+                            <p>{{ message.timestamp }}</p>
                         </div>
                     </div>
                 {% endif %}
@@ -33,10 +35,7 @@
     <div class="container my-5">
         <form action="/sendmessage/{{ contact.userID }}" method="POST">
             <div class="row">
-                <div class="col-md-2">
-                    <h4>Send Message</h4>
-                </div>
-                <div class="col-md-9">
+                <div class="col-md-11">
                     <input name="content" type="text" class="form-control" id="content" aria-describedby="content" placeholder="Type your message here...">
                 </div>
                 <div class="col-md-1">
