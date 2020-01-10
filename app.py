@@ -201,7 +201,6 @@ def auth():
         return redirect(url_for('feed'))
     # information inputted into the form by the user
     user = usersfunctions.getUserByEmail(request.form['email'])
-
     if user == None: # if email not found
         flash("No user found with given email", "error")
         return redirect(url_for('login'))
