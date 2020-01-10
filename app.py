@@ -64,15 +64,35 @@ def friends():
 @app.route("/searchfriends", methods=["POST"])
 @login_required
 def searchfriends():
+    userID = session['userID']
     query = request.form['query']
     users = usersfunctions.searchUsers(query)
-    return render_template("friends.html", users=users)
+    reqs = friendsfunctions.getFriendRequests(userID)
+    friendrequests = {}
+    for req in reqs:
+        friendrequests[req] = usersfunctions.getUser(req.senderID)
+    preqs = friendsfunctions.getPendingFriendRequests(userID)
+    pendingfriendrequests = {}
+    for preq in preqs:
+        pendingfriendrequests[preq] = usersfunctions.getUser(preq.receiverID)
+    print(pendingfriendrequests)
+    return render_template("friends.html", users=users, friendrequests=friendrequests, pendingfriendrequests=pendingfriendrequests)
 
 @app.route("/allusers")
 @login_required
 def allusers():
+    userID = session['userID']
     users = usersfunctions.getAllUsers()
-    return render_template("friends.html", users=users)
+    reqs = friendsfunctions.getFriendRequests(userID)
+    friendrequests = {}
+    for req in reqs:
+        friendrequests[req] = usersfunctions.getUser(req.senderID)
+    preqs = friendsfunctions.getPendingFriendRequests(userID)
+    pendingfriendrequests = {}
+    for preq in preqs:
+        pendingfriendrequests[preq] = usersfunctions.getUser(preq.receiverID)
+    print(pendingfriendrequests)
+    return render_template("friends.html", users=users, friendrequests=friendrequests, pendingfriendrequests=pendingfriendrequests)
 
 @app.route("/sendfriendrequest/<receiverID>")
 @login_required
