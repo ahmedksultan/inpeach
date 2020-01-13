@@ -36,7 +36,10 @@ def root():
 @app.route("/dashboard")
 @login_required
 def dashboard():
-    return render_template("dashboard.html", user=session['firstName'], weather=api.getCurrentWeather())
+    return render_template("dashboard.html", 
+        user=session['firstName'], 
+        weather=api.getCurrentWeather(), 
+        news=api.getNewsArticles())
 
 @app.route("/feed")
 @login_required
