@@ -127,25 +127,40 @@ def profile(userID):
 @app.route("/communities")
 @login_required
 def communities():
-    return render_template("communities.html", user=session['displayName'])
+    return render_template("communities.html")
 
-@app.route("/joincommunity/<groupID>", methods = ["POST"])
+@app.route("/newcommunity", methods = ["POST"])
 @login_required
-def joincommunity(groupID):
-    communitiesfunctions.joinCommunity(session['userID'], groupID)
-    return redriect(url_for("/communities"))
+def newcommunity():
+    userID = session['userID']
+    name = request.form['name']
+    description = request.form['description']
+    if communitiesfunctions.getCommunityByName(name) != None:
+        flash('Community with that name already exists', 'error')
+        return redirect(url_for("communities"))
+    communitiesfunctions.createCommunity(name, description)
+    community = communitiesfunctions.getCommunityByName(name)
+    communitiesfunctions.joinCommunity(userID, community.communityID)
+    return redirect(url_for('community', communityID = community.communityID))
 
-@app.route("/leavecommunity/<groupID>", methods = ["POST"])
-@login_required
-def leavecommunity(groupID):
-    communitiesfunctions.leaveCommunity(session['userID'], groupID)
-    return redriect(url_for("/communities"))
 
-@app.route("/community/<groupID>")
+@app.route("/joincommunity/<communityID>", methods = ["POST"])
 @login_required
-def community(groupID):
-    incommunity = communitiesfunctions.inCommunity(session['userID'])
-    return render_template("community.html", loggedin = communitiesfunctions.inCommunity(session['userID']))
+def joincommunity(communityID):
+    communitiesfunctions.joinCommunity(session['userID'], communityID)
+    return redriect(url_for("communities"))
+
+@app.route("/leavecommunity/<communityID>", methods = ["POST"])
+@login_required
+def leavecommunity(communityID):
+    communitiesfunctions.leaveCommunity(session['userID'], communityID)
+    return redriect(url_for("communities"))
+
+@app.route("/community/<communityID>")
+@login_required
+def community(communityID):
+    incommunity = communitiesfunctions.inCommunity(session['userID'], communityID)
+    return render_template("community.html", loggedin = incommunity)
 
 @app.route("/messages/")
 @login_required

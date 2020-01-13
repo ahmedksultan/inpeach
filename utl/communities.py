@@ -1,5 +1,9 @@
 from .models import db, Community, Member, User
 
+def getCommunityByName(name):
+    community = Community.query.filter_by(name=name).first()
+    return community
+
 def getCommunities(userID):
     members = Member.query.filter_by(userID=userID).all()
     communities = []
@@ -12,8 +16,8 @@ def inCommunity(userID, communityID):
     members = Member.query.filter_by(userID=userID).all()
     for member in members:
         if(member.communityID == communityID):
-            return true;
-    return false;
+            return True
+    False
 
 def createCommunity(name, description):
     community = Community(name=name, description=description)
