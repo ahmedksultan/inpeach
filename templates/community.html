@@ -6,12 +6,13 @@
 </div>
 
 <div class="container">
-    <p>Description: {{ community.description }}</p>
+    <h2>Description: {{ community.description }}</h2>
 </div>
 
 {% if incommunity %}
 <div class="container">
-    You are in this community!
+    <p>You are in this community!</p>
+    <a href="/leavecommunity/{{ community.communityID }}" class="btn btn-warning">Leave this Community</a>
 </div>
 {% else %}
 <div class="container">

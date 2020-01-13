@@ -155,7 +155,7 @@ def joincommunity(communityID):
 @login_required
 def leavecommunity(communityID):
     communitiesfunctions.leaveCommunity(session['userID'], communityID)
-    return redriect(url_for("communities"))
+    return redirect(url_for("communities"))
 
 @app.route("/community/<communityID>")
 @login_required
