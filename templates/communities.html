@@ -43,6 +43,20 @@ class="container">
   </div>
 </div>
 
+<div class="container">
+    <ul>
+        {% for community in communities %}
+        <div class="card my-3">
+            <h5 class="card-header">{{ community.name }}</h5>
+            <div class="card-body">
+                <p>{{ community.description }}</p>
+                <a href="/community/{{ community.communityID }}" class="btn btn-warning">View Community</a>
+            </div>
+        </div>
+        {% endfor %}
+    </ul>
+</div>
+
 {% endblock %}
 
 {% block footer %}

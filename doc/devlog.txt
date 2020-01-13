@@ -45,3 +45,6 @@ Updated friends and messages pages.
 
 kaziJ -- 2020-01-10 16:23
 Created me page and redirected profile page for current user to me page.
+
+kaziJ -- 2020-01-13 14:31
+Worked on communities and community pages. Passed data for communities.
