@@ -148,17 +148,17 @@ def newcommunity():
     return redirect(url_for('community', communityID = community.communityID))
 
 
-@app.route("/joincommunity/<communityID>", methods = ["POST"])
+@app.route("/joincommunity/<communityID>")
 @login_required
 def joincommunity(communityID):
     communitiesfunctions.joinCommunity(session['userID'], communityID)
-    return redriect(url_for("communities"))
+    return redirect(url_for("community", communityID=communityID))
 
-@app.route("/leavecommunity/<communityID>", methods = ["POST"])
+@app.route("/leavecommunity/<communityID>")
 @login_required
 def leavecommunity(communityID):
     communitiesfunctions.leaveCommunity(session['userID'], communityID)
-    return redriect(url_for("communities"))
+    return redirect(url_for("communities"))
 
 @app.route("/community/<communityID>")
 @login_required

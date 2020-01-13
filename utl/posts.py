@@ -17,5 +17,5 @@ def createPost(communityID, userID, title, content):
     db.session.commit()
 
 def deletePost(postID):
-    Post.query.filter_by(postID=postID).first().delete()
+    Post.query.filter_by(postID=postID).delete()
     db.session.commit()

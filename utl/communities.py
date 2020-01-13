@@ -38,5 +38,5 @@ def joinCommunity(userID, communityID):
     db.session.commit()
 
 def leaveCommunity(userID, communityID):
-    Member.query.filter_by(communityID=communityID, userID=userID).first().delete()
+    Member.query.filter_by(userID=userID, communityID=communityID).delete()
     db.session.commit()
