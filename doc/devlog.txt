@@ -73,3 +73,6 @@ Added ability to create and view posts from community page.
 
 kaziJ -- 2020-01-14 10:38
 Added ability to create and view comments on posts.
+
+kaziJ -- 2020-01-14 14:50
+Added ability to view members of a community.
