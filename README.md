@@ -12,6 +12,15 @@ Our project aims to create a Stuyvesant-centered social media web application, r
 - MetaWeather API: https://docs.google.com/document/d/18uyXB5XPFQoGFJpoa2yQvRPhevc3HaBU4kO-OYN-ieY/edit
 - News API: https://docs.google.com/document/d/1sLb7KpsBcx1_dCzuLicWvnSaQJRepZ1YM12tMxbj2RA/edit
 
+## Launch Codes
+### News API
+1) Visit https://newsapi.org/
+2) Press the Get API Key button
+3) Fill out and submit information required to register for an API key
+4) Once registration is complete copy the provided API key
+5) Open the `apikeys.json` file located in the `utl` folder of our project
+6) Replace `YOUR_API_KEY_HERE` for the `NEWS_API_KEY` with the API key you copied earlier
+
 ## How to Run the Project:
 - We are assuming that the user has installed Python3 and pip in their environment
 - If not, install Python3 from https://www.python.org/downloads/

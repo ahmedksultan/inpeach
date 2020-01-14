@@ -60,3 +60,6 @@ Also, removing testing print statement for News API
 kaziJ -- 2020-01-13 23:10
 Update hiding API key to use a JSON file.
 Adding error handling for invalid API KEY.
+
+kaziJ -- 2020-01-13 23:20
+Updated launch codes in README.
