@@ -1,5 +1,6 @@
 import urllib.request as request
 import json
+from utl import api_keys
 
 def getCurrentWeather():
     weatherlink = "https://www.metaweather.com/api/location/2459115/"
@@ -11,7 +12,7 @@ def getCurrentWeather():
     return weather
 
 def getNewsArticles():
-     newslink = "https://newsapi.org/v2/top-headlines?country=us&apiKey=0eb326895bb344acb80c48b0a3338c7b"
+     newslink = "https://newsapi.org/v2/top-headlines?country=us&apiKey=" + api_keys.news_api_key
      newsjson = request.urlopen(newslink).read()
      news = json.loads(newsjson)['articles']
      print(news)
