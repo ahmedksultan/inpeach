@@ -36,10 +36,13 @@ def root():
 @app.route("/dashboard")
 @login_required
 def dashboard():
+    news = api.getNewsArticles()
+    if news == "Invalid API Key":
+        return render_template("error.html", error=news)
     return render_template("dashboard.html", 
         user=session['firstName'], 
         weather=api.getCurrentWeather(), 
-        news=api.getNewsArticles())
+        news=news)
 
 @app.route("/feed")
 @login_required

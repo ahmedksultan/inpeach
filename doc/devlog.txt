@@ -56,3 +56,7 @@ Tonight, continued to work on utilizing News API.
 ahmedS -- 2020-01-13 22:40    
 Hid API key for news, editing .gitignore
 Also, removing testing print statement for News API
+
+kaziJ -- 2020-01-13 23:10
+Update hiding API key to use a JSON file.
+Adding error handling for invalid API KEY.

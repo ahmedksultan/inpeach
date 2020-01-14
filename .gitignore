@@ -128,4 +128,4 @@ ehthumbs.db
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # API Keys #
-utl/api_keys.py
+utl/apikeys.json
