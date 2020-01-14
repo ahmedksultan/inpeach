@@ -1,19 +1,27 @@
-{% extends "base.html" %}
-<!DOCTYPE html>
-<html>
-<head>
-</head>
-<body>
-  <!-- {% for title, text in allPosts.iteritems() %} -->
-    <!-- TODO: add bootsrap-->
-    <div class="container">
-      <div class = "row">
-        <div class = "col-l"> {{title}} </div>
-      </div>
-      <div class = "row">
-        {{text}}
-      </div>
+{% extends "logbase.html" %}
+
+{% block body %}
+    <div class="container col-md-5 bg-light border border-primary" style="padding: 2em; margin-top: 5vh; border-radius: 1em;">
+        <div class="col">
+            <h2>{{ post.title }}</h2>
+            <h5> <i>{{ creator.displayName }}</i> : {{ post.timestamp }}<h5>
+            <hr>
+            <p>{{ post.content }}</p>
+            <hr>
+            {% if not comments %}
+            <p>No comments.</p>
+            {% else %}
+            {% for comment in comments %}
+            <div class="card">
+                <div class="card-body">
+                    <p>comment.content</p>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
     </div>
-  <!-- {% endfor %} -->
-</body>
-</html>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

@@ -9,6 +9,7 @@ from utl import friends as friendsfunctions
 from utl import messages as messagesfunctions
 from utl import users as usersfunctions
 from utl import posts as postsfunctions
+from utl import comments as commentsfunctions
 import os
 
 
@@ -227,7 +228,9 @@ def timelinepost():
 @login_required
 def viewpost(postID):
     post = postsfunctions.getPost(postID)
-    return render_template("post.html", post=post)
+    creator = postsfunctions.getCreator(postID)
+    comments = commentsfunctions.getComments(postID)
+    return render_template("post.html", post=post, creator=creator, comments=comments)
 
 @app.route("/login")
 def login():
