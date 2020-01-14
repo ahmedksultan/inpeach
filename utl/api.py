@@ -15,6 +15,5 @@ def getNewsArticles():
      newslink = "https://newsapi.org/v2/top-headlines?country=us&apiKey=" + api_keys.news_api_key
      newsjson = request.urlopen(newslink).read()
      news = json.loads(newsjson)['articles']
-     print(news)
      return news
 

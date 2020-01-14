@@ -52,3 +52,7 @@ Worked on communities and community pages. Passed data for communities.
 ahmedS -- 2020-01-13 22:14
 Retroactively adding to devlog; this weekend, worked on adding to dashboard and utilizing News API.
 Tonight, continued to work on utilizing News API.
+
+ahmedS -- 2020-01-13 22:40    
+Hid API key for news, editing .gitignore
+Also, removing testing print statement for News API
