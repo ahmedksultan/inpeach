@@ -127,7 +127,8 @@ def profile(userID):
 @app.route("/communities")
 @login_required
 def communities():
-    return render_template("communities.html")
+    communities = communitiesfunctions.getAllCommunities()
+    return render_template("communities.html", communities=communities)
 
 @app.route("/newcommunity", methods = ["POST"])
 @login_required
@@ -144,13 +145,13 @@ def newcommunity():
     return redirect(url_for('community', communityID = community.communityID))
 
 
-@app.route("/joincommunity/<communityID>", methods = ["POST"])
+@app.route("/joincommunity/<communityID>")
 @login_required
 def joincommunity(communityID):
     communitiesfunctions.joinCommunity(session['userID'], communityID)
-    return redriect(url_for("communities"))
+    return redirect(url_for("community", communityID=communityID))
 
-@app.route("/leavecommunity/<communityID>", methods = ["POST"])
+@app.route("/leavecommunity/<communityID>")
 @login_required
 def leavecommunity(communityID):
     communitiesfunctions.leaveCommunity(session['userID'], communityID)
@@ -159,8 +160,9 @@ def leavecommunity(communityID):
 @app.route("/community/<communityID>")
 @login_required
 def community(communityID):
+    community = communitiesfunctions.getCommunity(communityID)
     incommunity = communitiesfunctions.inCommunity(session['userID'], communityID)
-    return render_template("community.html", loggedin = incommunity)
+    return render_template("community.html", community = community, incommunity = incommunity)
 
 @app.route("/messages/")
 @login_required

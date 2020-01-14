@@ -4,6 +4,14 @@ def getCommunityByName(name):
     community = Community.query.filter_by(name=name).first()
     return community
 
+def getCommunity(communityID):
+    community = Community.query.filter_by(communityID=communityID).first()
+    return community
+
+def getAllCommunities():
+    communities = Community.query.all()
+    return communities
+
 def getCommunities(userID):
     members = Member.query.filter_by(userID=userID).all()
     communities = []
@@ -13,11 +21,10 @@ def getCommunities(userID):
     return community
 
 def inCommunity(userID, communityID):
-    members = Member.query.filter_by(userID=userID).all()
-    for member in members:
-        if(member.communityID == communityID):
-            return True
-    False
+    member = Member.query.filter_by(userID=userID, communityID=communityID).first()
+    if member == None:
+        return False
+    return True
 
 def createCommunity(name, description):
     community = Community(name=name, description=description)
