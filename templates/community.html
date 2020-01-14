@@ -8,7 +8,8 @@
 
 {% if incommunity %}
 <div class="container">
-    <a href="/leavecommunity/{{ community.communityID }}" class="btn btn-danger">Leave this Community</a>
+  <a href="/leavecommunity/{{ community.communityID }}" class="btn btn-danger">Leave this Community</a>
+  <a href="/community/{{ community.communityID }}/members" class="btn btn-success">View Members</a>
 
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newCommunityPostModal">

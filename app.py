@@ -182,6 +182,13 @@ def community(communityID):
         posts[post] = postsfunctions.getCreator(post.postID)
     return render_template("community.html", community=community, incommunity=incommunity, posts=posts)
 
+@app.route("/community/<communityID>/members")
+@login_required
+def communitymembers(communityID):
+    community = communitiesfunctions.getCommunity(communityID)
+    members = communitiesfunctions.getMembers(communityID)
+    return render_template("communitymembers.html", community=community, members=members)
+
 @app.route("/messages/")
 @login_required
 def messages():
