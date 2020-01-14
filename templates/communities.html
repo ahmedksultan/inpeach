@@ -8,9 +8,11 @@
 <div 
 class="container">
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#newCommunityModal">
-    Create a New Community
-  </button>
+<div class="text-center">
+    <button type="button" class="btn btn-lg btn-outline-primary" data-toggle="modal" data-target="#newCommunityModal">
+        Create a New Community
+    </button>
+</div>
   
   <!-- Modal -->
   <div class="modal fade" id="newCommunityModal" tabindex="-1" role="dialog" aria-labelledby="newCommunityModalTitle" aria-hidden="true">
@@ -51,6 +53,11 @@ class="container">
             <div class="card-body">
                 <p>{{ community.description }}</p>
                 <a href="/community/{{ community.communityID }}" class="btn btn-warning">View Community</a>
+                {% if communities[community] %}
+                <a href="/leavecommunity/{{ community.communityID }}" class="btn btn-danger">Leave this Community</a>
+                {% else %}
+                <a href="/joincommunity/{{ community.communityID }}" class="btn btn-success">Join this Community</a>
+                {% endif %}
             </div>
         </div>
         {% endfor %}

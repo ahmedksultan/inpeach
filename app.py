@@ -8,6 +8,7 @@ from utl import communities as communitiesfunctions
 from utl import friends as friendsfunctions
 from utl import messages as messagesfunctions
 from utl import users as usersfunctions
+from utl import posts as postsfunctions
 import os
 
 
@@ -133,7 +134,13 @@ def profile(userID):
 @app.route("/communities")
 @login_required
 def communities():
-    communities = communitiesfunctions.getAllCommunities()
+    community_data = communitiesfunctions.getAllCommunities()
+    communities = {}
+    for community in community_data:
+        if communitiesfunctions.inCommunity(session['userID'], community.communityID):
+            communities[community] = True
+        else:
+            communities[community] = False
     return render_template("communities.html", communities=communities)
 
 @app.route("/newcommunity", methods = ["POST"])
@@ -155,7 +162,7 @@ def newcommunity():
 @login_required
 def joincommunity(communityID):
     communitiesfunctions.joinCommunity(session['userID'], communityID)
-    return redirect(url_for("community", communityID=communityID))
+    return redirect(url_for("community", communityID=communityID, ))
 
 @app.route("/leavecommunity/<communityID>")
 @login_required
@@ -168,7 +175,11 @@ def leavecommunity(communityID):
 def community(communityID):
     community = communitiesfunctions.getCommunity(communityID)
     incommunity = communitiesfunctions.inCommunity(session['userID'], communityID)
-    return render_template("community.html", community = community, incommunity = incommunity)
+    post_data = postsfunctions.getCommunityPosts(communityID)
+    posts = {}
+    for post in post_data:
+        posts[post] = postsfunctions.getCreator(post.postID)
+    return render_template("community.html", community=community, incommunity=incommunity, posts=posts)
 
 @app.route("/messages/")
 @login_required
