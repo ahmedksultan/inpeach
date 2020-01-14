@@ -10,6 +10,7 @@ from utl import messages as messagesfunctions
 from utl import users as usersfunctions
 from utl import posts as postsfunctions
 from utl import comments as commentsfunctions
+from utl import feed as feedfunctions
 import os
 
 
@@ -49,7 +50,8 @@ def dashboard():
 @app.route("/feed")
 @login_required
 def feed():
-    return render_template("feed.html")
+    posts = feedfunctions.getPosts(session['userID'])
+    return render_template("feed.html", posts=posts)
 
 @app.route("/friends")
 @login_required
@@ -130,7 +132,8 @@ def profile(userID):
     else:
         user = usersfunctions.getUser(userID)
         isFriend = friendsfunctions.isFriend(currentuserID, userID)
-        return render_template("profile.html", user=user, isFriend=isFriend)
+        posts = postsfunctions.getUserPosts(user.userID)
+        return render_template("profile.html", user=user, isFriend=isFriend, posts=posts)
 
 @app.route("/communities")
 @login_required
@@ -212,8 +215,10 @@ def sendmessage(contactID):
 @app.route("/me")
 @login_required
 def myfeed():
-    user = usersfunctions.getUser(session['userID'])
-    return render_template("me.html", user=user)
+    userID = session['userID']
+    user = usersfunctions.getUser(userID)
+    posts = postsfunctions.getUserPosts(userID)
+    return render_template("me.html", user=user, posts=posts)
 
 @app.route("/community/<communityID>/post", methods=["POST"])
 @login_required
@@ -229,7 +234,7 @@ def timelinepost():
     content = request.form['content']
     title = request.form['title']
     postsfunctions.createPost(None, session['userID'], title, content)
-    return redirect(url_for("me"))
+    return redirect(url_for("myfeed"))
 
 @app.route("/post/<postID>")
 @login_required
