@@ -209,7 +209,7 @@ def myfeed():
 
 @app.route("community/<communityID>/post")
 @login_required
-def post(communityID):
+def communitypost(communityID):
     content = request.form['content']
     title = request.form['title']
     postsfunctions.createPost(communityID, session['userID'], title, content)
@@ -217,7 +217,7 @@ def post(communityID):
 
 @app.route("/post")
 @login_required
-def post():
+def timelinepost():
     content = request.form['content']
     title = request.form['title']
     postsfunctions.createPost(None, session['userID'], title, content)
