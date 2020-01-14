@@ -213,7 +213,7 @@ def post(communityID):
     content = request.form['content']
     title = request.form['title']
     posts.createPost(communityID, session['userID'], title, content)
-    return redirect(url_for("community/"+str(communityID)+".html"))
+    return redirect(url_for("community", communityID=communityID))
 
 @app.route("/post")
 @login_required
@@ -221,7 +221,7 @@ def post():
     content = request.form['content']
     title = request.form['title']
     posts.createPost(None, session['userID'], title, content)
-    return render_template("me.html", user=user)
+    return redirect(url_for("me"))
 
 @app.route("/login")
 def login():
