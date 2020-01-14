@@ -8,6 +8,8 @@ from utl import communities as communitiesfunctions
 from utl import friends as friendsfunctions
 from utl import messages as messagesfunctions
 from utl import users as usersfunctions
+from utl import posts as postsfunctions
+from utl import comments as commentsfunctions
 import os
 
 
@@ -36,7 +38,13 @@ def root():
 @app.route("/dashboard")
 @login_required
 def dashboard():
-    return render_template("dashboard.html", user=session['firstName'], weather=api.getCurrentWeather())
+    news = api.getNewsArticles()
+    if news == "Invalid API Key":
+        return render_template("error.html", error=news)
+    return render_template("dashboard.html",
+        user=session['firstName'],
+        weather=api.getCurrentWeather(),
+        news=news)
 
 @app.route("/feed")
 @login_required
@@ -119,7 +127,7 @@ def profile(userID):
     currentuserID = session['userID']
     if currentuserID == int(userID):
         return redirect(url_for('myfeed'))
-    else: 
+    else:
         user = usersfunctions.getUser(userID)
         isFriend = friendsfunctions.isFriend(currentuserID, userID)
         return render_template("profile.html", user=user, isFriend=isFriend)
@@ -127,7 +135,13 @@ def profile(userID):
 @app.route("/communities")
 @login_required
 def communities():
-    communities = communitiesfunctions.getAllCommunities()
+    community_data = communitiesfunctions.getAllCommunities()
+    communities = {}
+    for community in community_data:
+        if communitiesfunctions.inCommunity(session['userID'], community.communityID):
+            communities[community] = True
+        else:
+            communities[community] = False
     return render_template("communities.html", communities=communities)
 
 @app.route("/newcommunity", methods = ["POST"])
@@ -149,20 +163,24 @@ def newcommunity():
 @login_required
 def joincommunity(communityID):
     communitiesfunctions.joinCommunity(session['userID'], communityID)
-    return redirect(url_for("community", communityID=communityID))
+    return redirect(url_for("community", communityID=communityID, ))
 
 @app.route("/leavecommunity/<communityID>")
 @login_required
 def leavecommunity(communityID):
     communitiesfunctions.leaveCommunity(session['userID'], communityID)
-    return redriect(url_for("communities"))
+    return redirect(url_for("communities"))
 
 @app.route("/community/<communityID>")
 @login_required
 def community(communityID):
     community = communitiesfunctions.getCommunity(communityID)
     incommunity = communitiesfunctions.inCommunity(session['userID'], communityID)
-    return render_template("community.html", community = community, incommunity = incommunity)
+    post_data = postsfunctions.getCommunityPosts(communityID)
+    posts = {}
+    for post in post_data:
+        posts[post] = postsfunctions.getCreator(post.postID)
+    return render_template("community.html", community=community, incommunity=incommunity, posts=posts)
 
 @app.route("/messages/")
 @login_required
@@ -189,6 +207,40 @@ def sendmessage(contactID):
 def myfeed():
     user = usersfunctions.getUser(session['userID'])
     return render_template("me.html", user=user)
+
+@app.route("/community/<communityID>/post", methods=["POST"])
+@login_required
+def communitypost(communityID):
+    content = request.form['content']
+    title = request.form['title']
+    postsfunctions.createPost(communityID, session['userID'], title, content)
+    return redirect(url_for("community", communityID=communityID))
+
+@app.route("/post", methods=["POST"])
+@login_required
+def timelinepost():
+    content = request.form['content']
+    title = request.form['title']
+    postsfunctions.createPost(None, session['userID'], title, content)
+    return redirect(url_for("me"))
+
+@app.route("/post/<postID>")
+@login_required
+def viewpost(postID):
+    post = postsfunctions.getPost(postID)
+    creator = postsfunctions.getCreator(postID)
+    comment_data = commentsfunctions.getComments(postID)
+    comments = {}
+    for comment in comment_data:
+        comments[comment] = usersfunctions.getUser(comment.userID)
+    return render_template("post.html", post=post, creator=creator, comments=comments)
+
+@app.route("/writecomment/<postID>", methods=["POST"])
+@login_required
+def writecomment(postID):
+    content = request.form['content']
+    commentsfunctions.createComment(postID, session['userID'], content)
+    return redirect(url_for("viewpost", postID=postID))
 
 @app.route("/login")
 def login():

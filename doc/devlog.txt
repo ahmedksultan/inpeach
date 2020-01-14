@@ -48,3 +48,28 @@ Created me page and redirected profile page for current user to me page.
 
 kaziJ -- 2020-01-13 14:31
 Worked on communities and community pages. Passed data for communities.
+
+ahmedS -- 2020-01-13 22:14
+Retroactively adding to devlog; this weekend, worked on adding to dashboard and utilizing News API.
+Tonight, continued to work on utilizing News API.
+
+ahmedS -- 2020-01-13 22:40    
+Hid API key for news, editing .gitignore
+Also, removing testing print statement for News API
+
+kaziJ -- 2020-01-13 23:10
+Update hiding API key to use a JSON file.
+Adding error handling for invalid API KEY.
+
+kaziJ -- 2020-01-13 23:20
+Updated launch codes in README.
+
+kaziJ -- 2020-01-13 23:59
+Updated communities page to display join or leave community buttons.
+Updated community page to show posts if user is a member.
+
+kaziJ -- 2020-01-14 09:51
+Added ability to create and view posts from community page.
+
+kaziJ -- 2020-01-14 10:38
+Added ability to create and view comments on posts.

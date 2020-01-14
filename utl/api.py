@@ -1,5 +1,13 @@
 import urllib.request as request
+import os
 import json
+
+apikeys_file = os.path.dirname(os.path.abspath(__file__)) + '/apikeys.json'
+
+with open(apikeys_file, 'r') as read_file:
+    apikeys = json.load(read_file)
+
+NEWS_API_KEY = apikeys['NEWS_API_KEY']
 
 def getCurrentWeather():
     weatherlink = "https://www.metaweather.com/api/location/2459115/"
@@ -9,3 +17,13 @@ def getCurrentWeather():
     weather['max_temp'] = int(weather['max_temp'] * 9.0 / 5.0 + 32)
     weather['the_temp'] = int(weather['the_temp'] * 9.0 / 5.0 + 32)
     return weather
+
+def getNewsArticles():
+    newslink = "https://newsapi.org/v2/top-headlines?country=us&apiKey=" + NEWS_API_KEY
+    try: 
+        newsjson = request.urlopen(newslink).read()
+        news = json.loads(newsjson)['articles']
+        return news
+    except:
+        return("Invalid API Key")
+
