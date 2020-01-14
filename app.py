@@ -229,8 +229,18 @@ def timelinepost():
 def viewpost(postID):
     post = postsfunctions.getPost(postID)
     creator = postsfunctions.getCreator(postID)
-    comments = commentsfunctions.getComments(postID)
+    comment_data = commentsfunctions.getComments(postID)
+    comments = {}
+    for comment in comment_data:
+        comments[comment] = usersfunctions.getUser(comment.userID)
     return render_template("post.html", post=post, creator=creator, comments=comments)
+
+@app.route("/writecomment/<postID>", methods=["POST"])
+@login_required
+def writecomment(postID):
+    content = request.form['content']
+    commentsfunctions.createComment(postID, session['userID'], content)
+    return redirect(url_for("viewpost", postID=postID))
 
 @app.route("/login")
 def login():

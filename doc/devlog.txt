@@ -70,3 +70,6 @@ Updated community page to show posts if user is a member.
 
 kaziJ -- 2020-01-14 09:51
 Added ability to create and view posts from community page.
+
+kaziJ -- 2020-01-14 10:38
+Added ability to create and view comments on posts.
