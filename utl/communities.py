@@ -26,6 +26,13 @@ def inCommunity(userID, communityID):
         return False
     return True
 
+def getMembers(communityID):
+    members = Member.query.filter_by(communityID=communityID).all()
+    users = []
+    for member in members:
+        users.append(User.query.filter_by(userID=member.userID).first())
+    return users
+
 def createCommunity(name, description):
     community = Community(name=name, description=description)
     db.session.add(community)
