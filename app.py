@@ -50,7 +50,10 @@ def dashboard():
 @app.route("/feed")
 @login_required
 def feed():
-    posts = feedfunctions.getPosts(session['userID'])
+    post_data = feedfunctions.getPosts(session['userID'])
+    posts = {}
+    for post in post_data:
+        posts[post] = postsfunctions.getCreator(post.postID)
     return render_template("feed.html", posts=posts)
 
 @app.route("/friends")
