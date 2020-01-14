@@ -15,4 +15,5 @@ def getNewsArticles():
      newsjson = request.urlopen(newslink).read()
      news = json.loads(newsjson)['articles']
      print(news)
+     return news
 

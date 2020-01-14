@@ -54,38 +54,17 @@
 <div class="row" style="margin-left: 5vw; margin-right: 5vw; margin-top: 5vh;">
     <!-- weather panel -->
     <div class="container col mx-3 bg-light border border-primary" style="padding: 2em; border-radius: 1em;">
-        <h3>{{ news[0]['title'] }}</h3>
+        <h6 class="text-secondary">{{ news[0]['source']['name'].upper() }}</h6>
+        <h5>{{ news[0]['title'] }}</h5>
     </div>
 
     <div class="container col mx-3 bg-light border border-primary" style="padding: 2em; border-radius: 1em;">
-        <img src="https://www.metaweather.com/static/img/weather/{{ weather['weather_state_abbr'] }}.svg"
-            style="float: right;" alt="weather icon" width=160>
-        <h3>Today's Weather</h3>
-    
-        <p class="m-0">
-            <b>{{ weather['weather_state_name'] }}&nbsp;&nbsp;&nbsp;&nbsp;||</b>&nbsp;&nbsp;&nbsp;&nbsp;{{ weather['the_temp'] }}°
-            F</p>
-        <p class="m-0"><b>High:</b> {{ weather['max_temp'] }}° F</p>
-        <p class="m-0"><b>Low:</b> {{ weather['min_temp'] }}° F</p>
-        <br>
-        <p><i>New York, NY</i></p>
+        <h3>{{ news[1]['title'] }}</h3>
     </div>
 
     <div class="container col mx-3 bg-light border border-primary" style="padding: 2em; border-radius: 1em;">
-        <img src="https://www.metaweather.com/static/img/weather/{{ weather['weather_state_abbr'] }}.svg"
-            style="float: right;" alt="weather icon" width=160>
-        <h3>Today's Weather</h3>
-    
-        <p class="m-0">
-            <b>{{ weather['weather_state_name'] }}&nbsp;&nbsp;&nbsp;&nbsp;||</b>&nbsp;&nbsp;&nbsp;&nbsp;{{ weather['the_temp'] }}°
-            F</p>
-        <p class="m-0"><b>High:</b> {{ weather['max_temp'] }}° F</p>
-        <p class="m-0"><b>Low:</b> {{ weather['min_temp'] }}° F</p>
-        <br>
-        <p><i>New York, NY</i></p>
+        <h3>{{ news[2]['title'] }}</h3>
     </div>
-
-
 </div>
 
 
