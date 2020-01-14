@@ -9,7 +9,43 @@
 {% if incommunity %}
 <div class="container">
     <a href="/leavecommunity/{{ community.communityID }}" class="btn btn-danger">Leave this Community</a>
-    <br><br>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newCommunityPostModal">
+        Make a Post
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="newCommunityPostModal" tabindex="-1" role="dialog" aria-labelledby="newCommunityPostModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">New Post</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/community/{{ community.communityID }}/post" method=POST>
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input name="title" type="text" class="form-control" id="title"  placeholder="Enter title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Content</label>
+                        <textarea name="content" rows="8" class="form-control" id="content" placeholder="Enter content" required></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-warning">Create</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container my-5">
     <h2>Posts</h2>
     <hr>
     {% if not posts %}
@@ -23,10 +59,9 @@
             <div class="col">
                 <ul>
                     <h2>{{ post.title }}</h2>
-                    <h5> <i>{{ posts[post].displayName }}</i><h5>
+                    <h5> <i>{{ posts[post].displayName }}</i> : {{ post.timestamp }}<h5>
                     <hr>
-                    <h4> {{ post.timestamp }} <h4>
-                    <p>{{ post.description }}</p>
+                    <p>{{ post.content }}</p>
                     <br>
     
                 </ul>
@@ -36,6 +71,7 @@
     {% endfor %}
     {% endif %}
 </div>
+
 {% else %}
 <div class="container">
     <a href="/joincommunity/{{ community.communityID }}" class="btn btn-success">Join this Community</a>

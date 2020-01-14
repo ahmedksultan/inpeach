@@ -67,3 +67,6 @@ Updated launch codes in README.
 kaziJ -- 2020-01-13 23:59
 Updated communities page to display join or leave community buttons.
 Updated community page to show posts if user is a member.
+
+kaziJ -- 2020-01-14 09:51
+Added ability to create and view posts from community page.

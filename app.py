@@ -207,7 +207,7 @@ def myfeed():
     user = usersfunctions.getUser(session['userID'])
     return render_template("me.html", user=user)
 
-@app.route("community/<communityID>/post")
+@app.route("/community/<communityID>/post", methods=["POST"])
 @login_required
 def communitypost(communityID):
     content = request.form['content']
@@ -215,13 +215,19 @@ def communitypost(communityID):
     postsfunctions.createPost(communityID, session['userID'], title, content)
     return redirect(url_for("community", communityID=communityID))
 
-@app.route("/post")
+@app.route("/post", methods=["POST"])
 @login_required
 def timelinepost():
     content = request.form['content']
     title = request.form['title']
     postsfunctions.createPost(None, session['userID'], title, content)
     return redirect(url_for("me"))
+
+@app.route("/post/<postID>")
+@login_required
+def viewpost(postID):
+    post = postsfunctions.getPost(postID)
+    return render_template("post.html", post=post)
 
 @app.route("/login")
 def login():

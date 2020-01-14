@@ -1,11 +1,11 @@
 from .models import db, Post, User
 
 def getUserPosts(userID):
-    posts = Post.query.filter_by(communityID=NULL, userID=userID)
+    posts = Post.query.filter_by(communityID=NULL, userID=userID).order_by(Post.timestamp.desc())
     return posts
 
 def getCommunityPosts(communityID):
-    posts = Post.query.filter_by(communityID=communityID)
+    posts = Post.query.filter_by(communityID=communityID).order_by(Post.timestamp.desc())
     return posts
 
 def createPost(communityID, userID, title, content):
