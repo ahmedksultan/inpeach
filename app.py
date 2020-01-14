@@ -39,9 +39,9 @@ def dashboard():
     news = api.getNewsArticles()
     if news == "Invalid API Key":
         return render_template("error.html", error=news)
-    return render_template("dashboard.html", 
-        user=session['firstName'], 
-        weather=api.getCurrentWeather(), 
+    return render_template("dashboard.html",
+        user=session['firstName'],
+        weather=api.getCurrentWeather(),
         news=news)
 
 @app.route("/feed")
@@ -125,7 +125,7 @@ def profile(userID):
     currentuserID = session['userID']
     if currentuserID == int(userID):
         return redirect(url_for('myfeed'))
-    else: 
+    else:
         user = usersfunctions.getUser(userID)
         isFriend = friendsfunctions.isFriend(currentuserID, userID)
         return render_template("profile.html", user=user, isFriend=isFriend)
@@ -194,6 +194,22 @@ def sendmessage(contactID):
 @login_required
 def myfeed():
     user = usersfunctions.getUser(session['userID'])
+    return render_template("me.html", user=user)
+
+@app.route("community/<communityID>/post")
+@login_required
+def post(communityID):
+    content = request.form['content']
+    title = request.form['title']
+    posts.createPost(communityID, session['userID'], title, content)
+    return redirect(url_for("community/"+str(communityID)+".html"))
+
+@app.route("/post")
+@login_required
+def post():
+    content = request.form['content']
+    title = request.form['title']
+    posts.createPost(None, session['userID'], title, content)
     return render_template("me.html", user=user)
 
 @app.route("/login")
