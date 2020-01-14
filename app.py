@@ -212,7 +212,7 @@ def myfeed():
 def post(communityID):
     content = request.form['content']
     title = request.form['title']
-    posts.createPost(communityID, session['userID'], title, content)
+    postsfunctions.createPost(communityID, session['userID'], title, content)
     return redirect(url_for("community", communityID=communityID))
 
 @app.route("/post")
@@ -220,7 +220,7 @@ def post(communityID):
 def post():
     content = request.form['content']
     title = request.form['title']
-    posts.createPost(None, session['userID'], title, content)
+    postsfunctions.createPost(None, session['userID'], title, content)
     return redirect(url_for("me"))
 
 @app.route("/login")
