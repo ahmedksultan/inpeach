@@ -52,19 +52,43 @@
 
 <!-- second row -->
 <div class="row" style="margin-left: 5vw; margin-right: 5vw; margin-top: 5vh;">
-    <!-- weather panel -->
+    <!-- news panel 0 -->
     <div class="container col mx-3 bg-light border border-primary" style="padding: 2em; border-radius: 1em;">
         <h6 class="text-secondary">{{ news[0]['source']['name'].upper() }}</h6>
         <h5>{{ news[0]['title'] }}</h5>
-        
+        <a href="{{ news[0]['url'] }}">
+            {% if news[0]['urlToImage'] == "" %}
+                <img style="width: 100%; height: auto;" src="https://files.gamebanana.com/img/ss/guis/57d8908b700eb.jpg">
+            {% else %}
+                <img style="width: 100%; height: auto;" src="{{ news[0]['urlToImage'] }}">
+            {% endif %}
+        </a>
     </div>
 
+    <!-- news panel 1 -->
     <div class="container col mx-3 bg-light border border-primary" style="padding: 2em; border-radius: 1em;">
-        <h3>{{ news[1]['title'] }}</h3>
+        <h6 class="text-secondary">{{ news[1]['source']['name'].upper() }}</h6>
+        <h5>{{ news[1]['title'] }}</h5>
+        <a href="{{ news[1]['url'] }}">
+            {% if news[1]['urlToImage'] == "" %}
+            <img style="width: 100%; height: auto;" src="https://files.gamebanana.com/img/ss/guis/57d8908b700eb.jpg">
+            {% else %}
+            <img style="width: 100%; height: auto;" src="{{ news[1]['urlToImage'] }}">
+            {% endif %}
+        </a>
     </div>
 
+    <!-- news panel 1 -->
     <div class="container col mx-3 bg-light border border-primary" style="padding: 2em; border-radius: 1em;">
-        <h3>{{ news[2]['title'] }}</h3>
+        <h6 class="text-secondary">{{ news[2]['source']['name'].upper() }}</h6>
+        <h5>{{ news[2]['title'] }}</h5>
+        <a href="{{ news[2]['url'] }}">
+            {% if news[2]['urlToImage'] == "" %}
+            <img style="width: 100%; height: auto;" src="https://files.gamebanana.com/img/ss/guis/57d8908b700eb.jpg">
+            {% else %}
+            <img style="width: 100%; height: auto;" src="{{ news[2]['urlToImage'] }}">
+            {% endif %}
+        </a>
     </div>
 </div>
 
