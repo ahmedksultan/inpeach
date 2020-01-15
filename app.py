@@ -13,7 +13,6 @@ from utl import comments as commentsfunctions
 from utl import feed as feedfunctions
 import os
 
-
 db = models.db
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -44,8 +43,10 @@ def dashboard():
         return render_template("error.html", error=news)
     return render_template("dashboard.html",
         user=session['firstName'],
-        weather=api.getCurrentWeather(),
-        news=news)
+        today=api.getTodayWeather(),
+        tomorrow=api.getTomorrowWeather(),
+        news=news,
+        xkcd=api.xkcd())
 
 @app.route("/feed")
 @login_required
