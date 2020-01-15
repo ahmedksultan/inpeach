@@ -6,12 +6,12 @@
 </div>
 
 <div class="row m-5">
-    <div class="col">
+    <div class="col-md-6">
         <ul>
             <h2>Your Communities</h2>
             <hr>
             {% for post in communityposts %}
-            <div class="row" style="margin-left: 5vw; margin-right: 5vw; margin-top: 5vh;">
+            <div class="row" style="margin-left: 1vw; margin-right: 1vw; margin-top: 5vh;">
                 <div class="container bg-light border border-primary" style="padding: 2em; border-radius: 1em;">
                     <div class="col">
                         <h2>{{ post.title }}</h2>
@@ -26,12 +26,12 @@
             {% endfor %}
         </ul>
     </div>
-    <div class="col">
+    <div class="col-md-6">
         <ul>
             <h2>Your Friends' Timelines</h2>
             <hr>
             {% for post in timelineposts %}
-            <div class="row" style="margin-left: 5vw; margin-right: 5vw; margin-top: 5vh;">
+            <div class="row" style="margin-left: 1vw; margin-right: 1vw; margin-top: 5vh;">
                 <div class="container bg-light border border-primary" style="padding: 2em; border-radius: 1em;">
                     <div class="col">
                         <h2>{{ post.title }}</h2>

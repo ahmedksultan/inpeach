@@ -35,6 +35,11 @@ def root():
     else:
         return redirect(url_for('login'))
 
+@app.route("/snake")
+@login_required
+def snake():
+    return render_template("snake.html")
+
 @app.route("/dashboard")
 @login_required
 def dashboard():
@@ -298,7 +303,7 @@ def register():
 def auth():
     if "userID" in session:
         flash("You were already logged in, "+session['displayName']+".", "error")
-        return redirect(url_for('feed'))
+        return redirect(url_for('dashboard'))
     # information inputted into the form by the user
     user = usersfunctions.getUserByEmail(request.form['email'])
     if user == None: # if email not found
