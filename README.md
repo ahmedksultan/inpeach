@@ -15,6 +15,9 @@ Our project aims to create a Stuyvesant-centered social media web application, r
 - News API: https://docs.google.com/document/d/1sLb7KpsBcx1_dCzuLicWvnSaQJRepZ1YM12tMxbj2RA/edit
   - Provides access to live data on trending and articles on the web from various news sources
   - Used to display three trending news articles with images linking to the original source on the dashboard page
+  
+## Video Demo
+[ video demo link coming soon ]
 
 ## Launch Codes
 ### News API
