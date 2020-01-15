@@ -35,6 +35,11 @@ def root():
     else:
         return redirect(url_for('login'))
 
+@app.route("/snake")
+@login_required
+def snake():
+    return render_template("snake.html")
+
 @app.route("/dashboard")
 @login_required
 def dashboard():
