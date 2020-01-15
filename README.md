@@ -10,7 +10,11 @@ Our project aims to create a Stuyvesant-centered social media web application, r
 
 ## APIs Utilized
 - MetaWeather API: https://docs.google.com/document/d/18uyXB5XPFQoGFJpoa2yQvRPhevc3HaBU4kO-OYN-ieY/edit
+  - Provides the weather for the next five days for locations using their woeid
+  - Used to display weather for the current date in New York City on the dashboard page
 - News API: https://docs.google.com/document/d/1sLb7KpsBcx1_dCzuLicWvnSaQJRepZ1YM12tMxbj2RA/edit
+  - Provides access to live data on trending and articles on the web from various news sources
+  - Used to display three trending news articles with images linking to the original source on the dashboard page
 
 ## Launch Codes
 ### News API
