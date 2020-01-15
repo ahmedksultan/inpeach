@@ -201,6 +201,11 @@ def communitymembers(communityID):
     members = communitiesfunctions.getMembers(communityID)
     return render_template("communitymembers.html", community=community, members=members)
 
+@app.route("/game")
+@login_required
+def game():
+    return render_template("game.html")
+
 @app.route("/messages/")
 @login_required
 def messages():
