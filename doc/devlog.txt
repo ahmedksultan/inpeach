@@ -88,3 +88,7 @@ Polished up code in feed.html and app.py
 
 kaziJ -- 2020-01-14 14:50
 Added ability to view members of a community.
+
+kaziJ -- 2020-01-15 00:28
+Display friends' timelines posts on feed.
+Display links to community for each community post on feed.

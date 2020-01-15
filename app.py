@@ -50,11 +50,17 @@ def dashboard():
 @app.route("/feed")
 @login_required
 def feed():
-    post_data = feedfunctions.getPosts(session['userID'])
-    posts = {}
-    for post in post_data:
-        posts[post] = postsfunctions.getCreator(post.postID)
-    return render_template("feed.html", posts=posts)
+    communitypost_data = feedfunctions.getCommunityPosts(session['userID'])
+    communityposts = {}
+    for post in communitypost_data:
+        communityposts[post] = []
+        communityposts[post].append(postsfunctions.getCreator(post.postID))
+        communityposts[post].append(communitiesfunctions.getCommunity(post.communityID))
+    timelinepost_data = feedfunctions.getTimelinePosts(session['userID'])
+    timelineposts = {}
+    for post in timelinepost_data:
+        timelineposts[post] = postsfunctions.getCreator(post.postID)
+    return render_template("feed.html", communityposts=communityposts, timelineposts=timelineposts)
 
 @app.route("/friends")
 @login_required
