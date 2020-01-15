@@ -1,36 +1,35 @@
 {% extends "logbase.html" %}
 
 {% block body %}
-    <div class="content">
-        <h1 class="display-3" style="font-weight: 700; padding-left: 5vw; padding-top: 5vh;">{{ user.displayName }}</h1>
-    </div>
-
-    <div class="container col-md-5 bg-light border border-primary text-center" style="padding: 2em; border-radius: 1em;">
-        <h3>First Name: {{ user.firstName }}</h3>
-        <h3>Last Name: {{ user.lastName }}</h3>
-        <h3>Email: {{ user.email }}</h3>
-        <h3>Grade: {{ user.grade }}</h3>
+    <div class="content" style="padding-left: 5vw; padding-top: 5vh; padding-right: 5vw;">
+        <h1 class="display-3" style="font-weight: 700;">{{ user.displayName }}</h1>
+        <h3 class="display-5 text-secondary"><i>{{ user.grade }}</i> || <i>{{ user.email }}</i></h1>
         {% if not isFriend %}
-        <a href="/sendfriendrequest/{{ user.userID }}" class="btn btn-warning">Send Friend Request</a>
+            <br>
+            <div class="text-center">
+                <a href="/sendfriendrequest/{{ user.userID }}" class="w-100 btn btn-warning text-center">Send friend request</a>
+            </div>
         {% endif %}
     </div>
-    <div class="container my-5">
+    <div style="padding-left: 5vw; padding-top: 5vh; padding-right: 5vw;">
+        <h2>Timeline</h2>
+        <hr>
         {% if isFriend %}
-            <h2>Timeline</h2>
-            <hr>
             {% for post in posts %}
-            <div class="row" style="margin-left: 5vw; margin-right: 5vw; margin-top: 5vh;">
-                <div class="container col-md-10 bg-light border border-primary" style="padding: 2em; border-radius: 1em;">
+            <div class="row" style="margin-top: 5vh;">
+                <div class="container col-md-10 bg-light w-100 border border-primary" style="padding: 2em; border-radius: 1em;">
                     <div class="col">
                         <h2>{{ post.title }}</h2>
-                        <h5>{{ post.timestamp }}<h5>
+                        <h5 class="text-secondary">{{ post.timestamp }}<h5>
                         <hr>
                         <pre>{{ post.content }}</pre>
-                        <a href="/post/{{ post.postID }}" class="btn btn-success">View Post and Comments</a>
+                        <a href="/post/{{ post.postID }}" class="btn btn-warning">View post & comment</a>
                     </div>
                 </div>
             </div>
             {% endfor %}
+        {% else %}
+            <p> You must be friends with this person to see their posts! </p>
         {% endif %}
     </div>
 {% endblock %}
