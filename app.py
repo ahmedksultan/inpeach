@@ -12,6 +12,7 @@ from utl import posts as postsfunctions
 from utl import comments as commentsfunctions
 from utl import feed as feedfunctions
 import os
+#most of these imports are from our own other files, the only new one is SQLAlchemy
 
 db = models.db
 app = Flask(__name__)
@@ -28,6 +29,7 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
+#home directoyy, forces you to log in if you didn't
 @app.route("/")
 def root():
     if "userID" in session:
@@ -35,14 +37,17 @@ def root():
     else:
         return redirect(url_for('login'))
 
+#our secret easteregg
 @app.route("/snake")
 @login_required
 def snake():
     return render_template("snake.html")
 
+#first page you see at login
 @app.route("/dashboard")
 @login_required
 def dashboard():
+    #shows the news and weather, pulls from the api lists
     news = api.getNewsArticles()
     if news == "Invalid API Key":
         return render_template("error.html", error=news)
@@ -53,31 +58,37 @@ def dashboard():
         news=news,
         xkcd=api.xkcd())
 
+#feed page as shown on the top of the webbrowser
 @app.route("/feed")
 @login_required
 def feed():
     communitypost_data = feedfunctions.getCommunityPosts(session['userID'])
     communityposts = {}
+    #just gets recent posts from communities you are in
     for post in communitypost_data:
         communityposts[post] = []
         communityposts[post].append(postsfunctions.getCreator(post.postID))
         communityposts[post].append(communitiesfunctions.getCommunity(post.communityID))
     timelinepost_data = feedfunctions.getTimelinePosts(session['userID'])
     timelineposts = {}
+    #this is the oredering of the community posts and showing which community its in
     for post in timelinepost_data:
         timelineposts[post] = postsfunctions.getCreator(post.postID)
     return render_template("feed.html", communityposts=communityposts, timelineposts=timelineposts)
 
 @app.route("/friends")
+#requesting freinds page
 @login_required
 def friends():
     userID = session['userID']
     friendslist = friendsfunctions.getFriends(userID)
     users = []
+    #adding all the freinds in the database to the webpage
     for friend in friendslist:
         users.append(usersfunctions.getUser(friend.friendID))
     reqs = friendsfunctions.getFriendRequests(userID)
     friendrequests = {}
+    #if requested or if you request update the page to shothat
     for req in reqs:
         friendrequests[req] = usersfunctions.getUser(req.senderID)
     preqs = friendsfunctions.getPendingFriendRequests(userID)
@@ -90,10 +101,12 @@ def friends():
 @app.route("/searchfriends", methods=["POST"])
 @login_required
 def searchfriends():
+    #searchfunction in the webpage
     userID = session['userID']
     query = request.form['query']
     users = usersfunctions.searchUsers(query)
     reqs = friendsfunctions.getFriendRequests(userID)
+    #looks through the entire doc to match ur search queary, no AI used to autofill or anythign fance
     friendrequests = {}
     for req in reqs:
         friendrequests[req] = usersfunctions.getUser(req.senderID)
@@ -101,7 +114,8 @@ def searchfriends():
     pendingfriendrequests = {}
     for preq in preqs:
         pendingfriendrequests[preq] = usersfunctions.getUser(preq.receiverID)
-    print(pendingfriendrequests)
+        #also showing if a request is pending under each frtiends
+    #print(pendingfriendrequests)
     return render_template("friends.html", users=users, friendrequests=friendrequests, pendingfriendrequests=pendingfriendrequests)
 
 @app.route("/allusers")
@@ -112,6 +126,7 @@ def allusers():
     reqs = friendsfunctions.getFriendRequests(userID)
     friendrequests = {}
     for req in reqs:
+        #gewtting all the userts for the searchfriends functions
         friendrequests[req] = usersfunctions.getUser(req.senderID)
     preqs = friendsfunctions.getPendingFriendRequests(userID)
     pendingfriendrequests = {}
@@ -124,17 +139,20 @@ def allusers():
 @login_required
 def sendfriendrequest(receiverID):
     friendsfunctions.sendFriendRequest(session['userID'], receiverID)
+    #send those freindrequests
     return redirect(url_for('friends'))
 
 @app.route("/acceptfriendrequest/<requestID>")
 @login_required
 def acceptfriendrequest(requestID):
     friendsfunctions.acceptFriendRequest(requestID)
+    #acceot the friendrequests
     return redirect(url_for('friends'))
 
 @app.route("/declinefriendrequest/<requestID>")
 @login_required
 def declinefriendrequest(requestID):
+    #decline the weirdos
     friendsfunctions.declineFriendRequest(requestID)
     return redirect(url_for('friends'))
 
@@ -144,6 +162,7 @@ def profile(userID):
     currentuserID = session['userID']
     if currentuserID == int(userID):
         return redirect(url_for('myfeed'))
+        #custom vs standard feed
     else:
         user = usersfunctions.getUser(userID)
         isFriend = friendsfunctions.isFriend(currentuserID, userID)
@@ -154,17 +173,21 @@ def profile(userID):
 @login_required
 def communities():
     community_data = communitiesfunctions.getAllCommunities()
+    #community data getiting pulled to see where ur in
+    #make a dict with all the communities
     communities = {}
     for community in community_data:
         if communitiesfunctions.inCommunity(session['userID'], community.communityID):
             communities[community] = True
         else:
+            #only shows the ones ur in to be the ones ur in
             communities[community] = False
     return render_template("communities.html", communities=communities)
 
 @app.route("/newcommunity", methods = ["POST"])
 @login_required
 def newcommunity():
+    #makes a new community and logs in on the database
     userID = session['userID']
     name = request.form['name']
     description = request.form['description']
@@ -182,16 +205,19 @@ def newcommunity():
 def joincommunity(communityID):
     communitiesfunctions.joinCommunity(session['userID'], communityID)
     return redirect(url_for("community", communityID=communityID, ))
+    #JOIN button
 
 @app.route("/leavecommunity/<communityID>")
 @login_required
 def leavecommunity(communityID):
     communitiesfunctions.leaveCommunity(session['userID'], communityID)
     return redirect(url_for("communities"))
+    #leave button
 
 @app.route("/community/<communityID>")
 @login_required
 def community(communityID):
+    #community page for each one
     community = communitiesfunctions.getCommunity(communityID)
     incommunity = communitiesfunctions.inCommunity(session['userID'], communityID)
     post_data = postsfunctions.getCommunityPosts(communityID)
@@ -199,6 +225,7 @@ def community(communityID):
     for post in post_data:
         posts[post] = postsfunctions.getCreator(post.postID)
     return render_template("community.html", community=community, incommunity=incommunity, posts=posts)
+    #shows all the posts in chronological order ^^^
 
 @app.route("/community/<communityID>/members")
 @login_required
@@ -206,11 +233,13 @@ def communitymembers(communityID):
     community = communitiesfunctions.getCommunity(communityID)
     members = communitiesfunctions.getMembers(communityID)
     return render_template("communitymembers.html", community=community, members=members)
+    #show the members in each community
 
 @app.route("/game")
 @login_required
 def game():
     return render_template("game.html")
+    #snake
 
 @app.route("/messages/")
 @login_required
@@ -218,12 +247,15 @@ def messages():
     friendslist = friendsfunctions.getFriends(session['userID'])
     return render_template("messages.html", friends=friendslist)
 
+    #messages page, showing list of friends and stuff
+
 @app.route("/messages/<contactID>")
 @login_required
 def chat(contactID):
     contact = usersfunctions.getUser(contactID)
     chat = messagesfunctions.getMessages(session['userID'], contactID)
     return render_template("chat.html", userID = session['userID'], contact=contact, messages=chat)
+    #chatting to an individual person, showin all past messages
 
 @app.route("/sendmessage/<contactID>", methods=["POST"])
 @login_required
@@ -231,6 +263,7 @@ def sendmessage(contactID):
     content = request.form['content']
     messagesfunctions.sendMessage(session['userID'], contactID, content)
     return redirect(url_for('chat', contactID=contactID))
+    #send a message and put it on the database
 
 @app.route("/me")
 @login_required
@@ -239,6 +272,7 @@ def myfeed():
     user = usersfunctions.getUser(userID)
     posts = postsfunctions.getUserPosts(userID)
     return render_template("me.html", user=user, posts=posts)
+    #the personal feed mentioned earlier, with the custom html that says Welcome, Name.
 
 @app.route("/community/<communityID>/post", methods=["POST"])
 @login_required
@@ -247,6 +281,8 @@ def communitypost(communityID):
     title = request.form['title']
     postsfunctions.createPost(communityID, session['userID'], title, content)
     return redirect(url_for("community", communityID=communityID))
+    #same posting mechanism as in blog, request forms and upload them as strings
+    #on a db for communities
 
 @app.route("/post", methods=["POST"])
 @login_required
@@ -255,6 +291,8 @@ def timelinepost():
     title = request.form['title']
     postsfunctions.createPost(None, session['userID'], title, content)
     return redirect(url_for("myfeed"))
+    #these are gonna be a persons timelinepost
+    #equivalent to facebooks
 
 @app.route("/post/<postID>")
 @login_required
@@ -274,6 +312,8 @@ def writecomment(postID):
     commentsfunctions.createComment(postID, session['userID'], content)
     return redirect(url_for("viewpost", postID=postID))
 
+
+#STANDARD LOGIN FROM OTHER PROJECTS BELOW (little comments cuz its ez now)
 @app.route("/login")
 def login():
     return render_template("login.html")
