@@ -101,9 +101,19 @@ Polished up code in feed.html and app.py
 kaziJ -- 2020-01-14 14:50
 Added ability to view members of a community.
 
+ahmedS -- 2020-01-14 14:50
+Completed dashboard in class, and began work on restyling
+
 kevinC -- 2020-01-14 16:30
 Added game
+
+ahmedS -- 2020-01-14 18:00
+Styling overhaul of all pages
 
 kaziJ -- 2020-01-15 00:28
 Display friends' timelines posts on feed.
 Display links to community for each community post on feed.
+
+ahmedS -- 2020-01-15 7:35
+Retroactively adding to devlog
+Completed restyling for games (snake and 'dodgeblock'), and community completed
