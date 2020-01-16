@@ -114,6 +114,9 @@ kaziJ -- 2020-01-15 00:28
 Display friends' timelines posts on feed.
 Display links to community for each community post on feed.
 
-ahmedS -- 2020-01-15 7:35
+ahmedS -- 2020-01-15 07:35
 Retroactively adding to devlog
 Completed restyling for games (snake and 'dodgeblock'), and community completed
+
+ahmedS -- 2020-01-15 07:35
+Finished project
