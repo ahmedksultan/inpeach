@@ -57,7 +57,7 @@
         <div class="container col-md-10 bg-light w-100 border border-primary" style="padding: 2em; border-radius: 1em;">
             <div class="col">
                 <h2>{{ post.title }}</h2>
-                <h5 class="text-secondary">{{ post.timestamp }}<h5>
+                <h5 class="text-secondary"><i>{{ posts[post].displayName }}</i> :: {{ post.timestamp }}<h5>
                         <hr>
                         <pre>{{ post.content }}</pre>
                         <a href="/post/{{ post.postID }}" class="btn btn-warning">View post & comment</a>
