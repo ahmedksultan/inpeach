@@ -25,6 +25,9 @@ Updated functions to include more functions relating to communities, users, frie
 ahmedS -- 2020-01-07 21:00
 Made basic template pages for all main features.
 
+kevinC -- 2020-01-07 21:12
+Added basic routing
+
 kaziJ -- 2020-01-07 22:21
 Created requirements.txt file.
 
@@ -42,6 +45,9 @@ Added login/registration pages in templates folder & fixed-top.
 
 kaziJ -- 2020-01-08 19:57
 Updated README.md to have project description.
+
+kevinC -- 2020-01-18 23:30
+Added routing for community, made logbase.html
 
 kaziJ -- 2020-01-08 23:59
 Created functional messages and chat pages for testing.
@@ -62,6 +68,9 @@ ahmedS -- 2020-01-13 22:14
 Retroactively adding to devlog; this weekend, worked on adding to dashboard and utilizing News API.
 Tonight, continued to work on utilizing News API.
 
+kevinC -- 2020-01-13 12:30
+Added routing for posts
+
 ahmedS -- 2020-01-13 22:40
 Hid API key for news, editing .gitignore
 Also, removing testing print statement for News API
@@ -80,6 +89,9 @@ Updated community page to show posts if user is a member.
 kaziJ -- 2020-01-14 09:51
 Added ability to create and view posts from community page.
 
+kevinC -- 2020-01-14 10:28
+Added javascript for messages
+
 kaziJ -- 2020-01-14 10:38
 Added ability to create and view comments on posts.
 
@@ -88,6 +100,9 @@ Polished up code in feed.html and app.py
 
 kaziJ -- 2020-01-14 14:50
 Added ability to view members of a community.
+
+kevinC -- 2020-01-14 16:30
+Added game
 
 kaziJ -- 2020-01-15 00:28
 Display friends' timelines posts on feed.
