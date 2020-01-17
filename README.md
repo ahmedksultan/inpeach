@@ -17,7 +17,7 @@ Our project aims to create a Stuyvesant-centered social media web application, r
   - Used to display three trending news articles with images linking to the original source on the dashboard page
   
 ## Video Demo
-https://youtu.be/iXZoJQ586lI
+[video demo here](https://youtu.be/iXZoJQ586lI)
 
 ## Launch Codes
 ### News API
